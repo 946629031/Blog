@@ -16,6 +16,10 @@
 ----
 ### 正文开始
 ## 世界各国工作时间与人均GDP之比
+在中国，按照996，每天工作10个小时来计算，一名程序员一年工作时长为3600小时，或者更多。而中国的人均收入只有一万美元每年，由于中国贫富差距非常大，能真正达到年均一万美元收入的人实则更少...
+
+所以经计算，中国的 工作时间与人均GDP之比 应当如下
+
 ![世界各国工作时间与人均GDP之比](https://github.com/946629031/Blog/blob/master/img/gdppercapita-vs-annual-hours-worked.jpg)
 [image sours](https://ourworldindata.org/grapher/exports/gdppercapita-vs-annual-hours-worked.svg
 )
