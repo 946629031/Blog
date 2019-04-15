@@ -16,6 +16,5 @@
 ----
 ### 正文开始
 ![世界各国工作时间与人均GDP之比](http://g123.hkming.com/img/gdppercapita-vs-annual-hours-worked.jpg)
-
-
-![世界各国工作时间与人均gdp之比](https://ourworldindata.org/grapher/exports/gdppercapita-vs-annual-hours-worked.svg)
+[image sours](https://ourworldindata.org/grapher/exports/gdppercapita-vs-annual-hours-worked.svg
+)
