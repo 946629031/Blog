@@ -14,6 +14,7 @@
 [@程序员，你的 996，可能是给公司无能的管理背锅](https://blog.csdn.net/csdnnews/article/details/81611801)<br>
 [被“996”围困的年轻人：像是定好闹钟的机器](https://www.jishuwen.com/d/2ynw#tuit)<br>
 [被996困住的年轻人，像一台机器样生活](https://mp.weixin.qq.com/s?__biz=MjM5NDkxMDU4MA==&mid=2651089347&idx=1&sn=b928c26588200ec1bb39d1559843b5e0&chksm=bd7051d88a07d8ce1f986bb5a5cddb5e33c7fbc7fda23a41a8d5e18e5d7f10995f057913cfb0&mpshare=1&scene=1&srcid=0415HIDb3y6QXlSrVIYeFLzs&key=f7bb43d4492422e033b41930dd5f249c42a4e0f216a6aafe771de709a71e75062ea26e5412bac80d1db94d99101eab9f54500d6be3afa2d31f1ea386fd391db85c340a08e4c2ec10b05c4ae8c2994645&ascene=1&uin=MjU3MDk2NjU4MA%3D%3D&devicetype=Windows+10&version=62060739&lang=zh_CN&pass_ticket=E7bK4CZj8BwyoH5Muqjj0wo2cYFFx%2FXHKyn5QN5kP44%2Bb17R9aHRd%2FiPSiOFV6e3)
+[第697期 | 穷国没有创业精神吗？]()
 
 ----
 ### 正文开始
