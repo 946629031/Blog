@@ -5,7 +5,21 @@
 ----
 ### 参考资料
 视频：<br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/1oLdExa62AI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe
+    width="560"
+    height="315" 
+    src="https://www.youtube.com/embed/1oLdExa62AI" frameborder="0"
+    allow="accelerometer; 
+    autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+
+<iframe 
+    width="800" 
+    height="450" 
+    src="https://v.miaopai.com/iframe?scid=SvyHaHOczsp7B6ftW86oqMMz62-h5ai6~Fwp8A__"
+    frameborder="0" 
+    allowfullscreen>
+</iframe>
 
 <video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
     <source id="mp4" src="https://www.youtube.com/embed/1oLdExa62AI" type="video/mp4">
