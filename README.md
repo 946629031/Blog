@@ -7,6 +7,11 @@
 视频：<br>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1oLdExa62AI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+<video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
+    <source id="mp4" src="https://www.youtube.com/embed/1oLdExa62AI" type="video/mp4">
+    <p>為什麼80, 90後對工作缺乏熱情？因為老闆少做了這件事 - Simon Sinek</p>
+</video>
+
 [為什麼80, 90後對工作缺乏熱情？因為老闆少做了這件事 - Simon Sinek](https://www.youtube.com/watch?v=1oLdExa62AI)<br>
 [周周侃：“996运动”（上），哪些国家加班最多？](https://www.youtube.com/watch?v=mdItEYTB7Hk)<br>
 [周周侃：“996运动”（下）中国模式走到尽头，“低人权诅咒”与三大工人运动](https://www.youtube.com/watch?v=93OtoBTv270)
