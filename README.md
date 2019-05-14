@@ -48,6 +48,8 @@
     - [「中高级前端」窥探数据结构的世界- ES6版](https://juejin.im/post/5cd1ab3df265da03587c142a)
     - [中国第五届CSS大会分享：CSS TIME](https://mp.weixin.qq.com/s/MQAIA80nscHHsdyPJrKBQA)
     - [深入理解 DOM 事件机制](https://mp.weixin.qq.com/s/kMCPPnTUbq5AwKIfT2OP7Q)
+    - [深入理解JavaScript作用域和作用域链](https://mp.weixin.qq.com/s/j0UW9lHn32Tz-rowkWDhiQ)
+    - [图解原型链及其继承](https://mp.weixin.qq.com/s/1D8RZvxmXuq_r6V_o2jiFw)
 
 - ## 4.框架
     - [从头开始学习Vuex](https://mp.weixin.qq.com/s/c2bV5fs_u93V9s11weox9g)
@@ -77,8 +79,6 @@
         - 缓存服务：Caching Service
         - 消息队列：Message queue
     - [【第65期】详谈层合成（composite）](https://mp.weixin.qq.com/s/QLvCcYHN8fssM-A4uL5z_A)
-    - [深入理解JavaScript作用域和作用域链](https://mp.weixin.qq.com/s/j0UW9lHn32Tz-rowkWDhiQ)
-    - [图解原型链及其继承](https://mp.weixin.qq.com/s/1D8RZvxmXuq_r6V_o2jiFw)
     - [Javascript 中的爆栈](https://mp.weixin.qq.com/s/NDlGAodE3m2mU81JpKpiGg)
     - [[布局概念] 关于CSS-BFC深入理解](https://juejin.im/post/5909db2fda2f60005d2093db)
 
