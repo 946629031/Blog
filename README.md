@@ -21,7 +21,7 @@
         - [设计师都能懂的 Redux 指南](https://mp.weixin.qq.com/s/2tp_tmsOza81bWFuOOpf0A)
         - [让前端监控数据采集更高效](https://mp.weixin.qq.com/s/NHDJnQd6wL-TwpPdqtbbBQ)
 
-- ## 2.基础知识点
+- ## 2.基础知识点
     - [Dplayer H5播放器 插件](https://dplayer.js.org/#/zh-Hans/)
     - [HTML 5 视频直播一站式扫盲](https://juejin.im/entry/5779fa798ac24700534921b5)
         - 1.H5 到底能不能做视频直播？
@@ -49,14 +49,14 @@
     - [中国第五届CSS大会分享：CSS TIME](https://mp.weixin.qq.com/s/MQAIA80nscHHsdyPJrKBQA)
     - [深入理解 DOM 事件机制](https://mp.weixin.qq.com/s/kMCPPnTUbq5AwKIfT2OP7Q)
 
-- ## 3.框架
+- ## 4.框架
     - [从头开始学习Vuex](https://mp.weixin.qq.com/s/c2bV5fs_u93V9s11weox9g)
     - 1.[【React深入】React事件机制](https://mp.weixin.qq.com/s/pffJQXw-x09t-46Ek-KYqg)
     - [vue系列之面试总结](https://mp.weixin.qq.com/s/6J6nUMRAmUD_hsKue2oltg)
     - [「Vue进阶」5分钟撸一个Vue CLI 插件](https://juejin.im/post/5cb59c4bf265da03a743e979)
     - [React Today and Tomorrow and 90% Cleaner React With Hooks](https://www.yuque.com/alipay2088702560595591/kb/gb75rn)
 
-- ## 3.底层原理
+- ## 5.底层原理
     - [设计模式 - 米白小站](http://jiaoguoliang.com/?from=groupmessage&isappinstalled=0#/index/thought_DesignPattern)
     - [深入理解https工作原理](https://mp.weixin.qq.com/s/2DqMuTYYvacH6W0339-cUA)
     - [为什么HTTPS比HTTP更安全?](https://mp.weixin.qq.com/s/_ozg0qPtBHSQW8414dpapw)
@@ -82,12 +82,12 @@
     - [Javascript 中的爆栈](https://mp.weixin.qq.com/s/NDlGAodE3m2mU81JpKpiGg)
     - [[布局概念] 关于CSS-BFC深入理解](https://juejin.im/post/5909db2fda2f60005d2093db)
 
-- ## 4.性能优化
+- ## 6.性能优化
     - [【第63期】前端性能优化之雅虎35条军规](https://mp.weixin.qq.com/s/RJbVoKoxeDRgyINdZ8-pmQ)
     - [Chrome运行时性能瓶颈分析](https://mp.weixin.qq.com/s/zHcCF9QV3vbkiC7CieXUKg)
     - [记一次前端性能优化](https://mp.weixin.qq.com/s/CdmhdNy6rhlebEeBvL5ROA)
 
-- ## 5.编程规范
+- ## 7.编程规范
 
     - 1.[【第60期】JavaScript代码简洁之道 -  前端求生之路](https://mp.weixin.qq.com/s/ptvGuxL3DPrxhXVOjk-faA)
 
@@ -97,7 +97,7 @@
 
     - 3.[这些让人抓狂的烂代码，你碰到几种？](https://mp.weixin.qq.com/s/gdIZidCiZU0q8yeaYDEOHg)
 
-- ## 6.面试相关
+- ## 8.面试相关
     - [前端面试高频知识点](https://mp.weixin.qq.com/s/u_rqkG4cHbAKg6h7LwCh-A)
     - [为什么现在面试总是面试造火箭？- 前端桃园](https://mp.weixin.qq.com/s/4RXN6DSzULH-tEIFUZXp4Q)
     - [如何做出HR最想看到的简历](https://mp.weixin.qq.com/s/JbdVILPkzmGWQS2W7ti-KA)
@@ -110,7 +110,7 @@
     - [「各个大厂面试内容」2019金三银四魔都两年半前端面经](https://mp.weixin.qq.com/s/Dh5TYJBet0DTB_gd19ybOA)
     - [细节决定成败，不容忽视的10道Node面试题](https://mp.weixin.qq.com/s/tg1BpCPyP49d9Eq9SjRREg)
 
-- ## 7.其他工具
+- ## 9.其他工具
     - 1.[仿站小工具](https://smalltool.github.io/)
         - 通过网址下载静态网页的工具。从输入的网址下载html代码，提取出JS、Css、Image、Picture、Flash等静态文件网址，再从下载完好的Css代码中提取出Image静态文件网址，通过网址下载静态文件，根据软件设置好的保存规则，自动修正html和css代码链接路径，最终这些静态文件被按分类保存到电脑文件夹。
 
@@ -121,7 +121,7 @@
 
     - [Python实现微信防撤回 - 前端求生之路](https://mp.weixin.qq.com/s/lSbbqltsfdAXHCFGaH-_gg)
 
-- ## 8.经验之谈
+- ## 10.经验之谈
     - 1.[我们应该如何给需求排序？](https://mp.weixin.qq.com/s/fahMRC_vXg09Toah5TjvLw)
         - **结论**: 需求管理是一门艺术，需要考虑和权衡的东西很多，暂时给大家一个简单的优先级排序，仅供参考：
             - 用户反馈的 BUG
@@ -130,5 +130,5 @@
             - 自己想出的需求
     - 2.[【第72期】4 年前端狗 2 年 CTO](https://mp.weixin.qq.com/s/9Ek4NQtKN1uTikE0R4SO0g)
 
-- ## 9.插件
+- ## 11.插件
     - [Prettier - 代码格式化工具「已达 31.4k star」](https://mp.weixin.qq.com/s/WRkm0UpxP0m9Oxdfn8qO0Q)
