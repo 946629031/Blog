@@ -121,6 +121,10 @@
 
     - [Python实现微信防撤回 - 前端求生之路](https://mp.weixin.qq.com/s/lSbbqltsfdAXHCFGaH-_gg)
 
+    - [moviemasher.js, 用于实时，基于浏览器的视频和音频编辑的JavaScript库](https://www.helplib.com/GitHub/article_120215)
+
+
+
 - ## 10.经验之谈
     - 1.[我们应该如何给需求排序？](https://mp.weixin.qq.com/s/fahMRC_vXg09Toah5TjvLw)
         - **结论**: 需求管理是一门艺术，需要考虑和权衡的东西很多，暂时给大家一个简单的优先级排序，仅供参考：
