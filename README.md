@@ -122,6 +122,10 @@
     - [Python实现微信防撤回 - 前端求生之路](https://mp.weixin.qq.com/s/lSbbqltsfdAXHCFGaH-_gg)
 
     - [moviemasher.js, 用于实时，基于浏览器的视频和音频编辑的JavaScript库](https://www.helplib.com/GitHub/article_120215)
+    
+    - [怎么处理各个浏览器适配问题的呢？ ——《是时候升级你的浏览器了》](https://support.dmeng.net/upgrade-your-browser.html?referrer=)
+        - 基本不处理，出问题让换浏览器
+        - 你是网站技术人员吗？请加入旧版 Internet Explorer 淘汰行动。
 
 
 
