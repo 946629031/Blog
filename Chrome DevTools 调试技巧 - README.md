@@ -8,9 +8,24 @@
 --- | --- | --- | --- | --- |--- | ---
 1 | ▶ | f8 | resume script execution | 恢复脚本执行 | ~~不受断点影响，直接恢复脚本执行~~<br>直接执行到下一个断点之前。如果下面没有断点，就直接执行完所有代码 | 逐过程执行”按钮
 2 | ⌒ | f10 | step over next function call | 跳过下一个函数调用 | ~~逐行执行，但有时候好像不是逐行...~~<br>执行函数,而不进入函数 | ”逐语句执行“或者叫”逐步执行“
-3 | ↓ | f11 | step into next function call | 进入下一个函数调用 | 逐行执行<br>进一步调查该函数 | 
+3 | ↓ | f11 | step into next function call | 进入函数调用 | 逐行执行<br>进入该函数 | 
 4 | ↑ | Shift + f11 | step out for current function | 退出当前函数 | 跳出当前函数 | 
 5 | → | f9 | step | | 真正的 逐步执行 | 
+
+----
+
+- **add conditional breakpoint** 条件断点
+	- 条件断点，在对于 for 循环，或者某些特定情况下，暂停，是非常实用的一个功能
+	
+----
+
+- 右侧面板
+	- Call Stack 调用栈
+		- 调用栈中，由下往上，一层层执行，最后才执行到我们写的这个文件。（可以理解为基础，要先把下面的基础正确运行起来，上面的才能跑得通）
+	- Scope 作用域
+
+----
+
 
 - Google Chrome 官方文档
 		
