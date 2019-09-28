@@ -20,6 +20,8 @@
         - [「HTML5 Canvas 完整教程」 - Canvas: Draw on the web](https://www.yuque.com/airing/canvas)
         - [设计师都能懂的 Redux 指南](https://mp.weixin.qq.com/s/2tp_tmsOza81bWFuOOpf0A)
         - [让前端监控数据采集更高效](https://mp.weixin.qq.com/s/NHDJnQd6wL-TwpPdqtbbBQ)
+        - [前端工程化：实践可视化搭建系统](https://juejin.im/post/5d8774bff265da03ae78b2a1)
+            - 随公司业务不断发展，营销活动、广告、页面改版等需求日益倍增，靠纯人工撸代码已经无法跟上需求增长速度。这时候就需要一个提效工具帮助我们生成代码，推荐一篇介绍可视化界面搭建系统的文章
 
 - ## 2.基础知识点
     - [Dplayer H5播放器 插件](https://dplayer.js.org/#/zh-Hans/)
