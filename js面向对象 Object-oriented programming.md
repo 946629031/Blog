@@ -10,6 +10,14 @@
 
 参考文章
 - [《适合初学者的JavaScript面向对象》 - MDN](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object-oriented_JS)
+- [《js面向对象编程》 - 廖雪峰](https://www.liaoxuefeng.com/wiki/1022910821149312/1023022126220448)
+- [《JavaScript函数式编程之深入理解纯函数》](https://juejin.im/post/5b1a251e6fb9a01e83146ddf)
+- [JavaScript函数式编程之为什么要函数式编程（非严谨技术层面的扯淡）](https://github.com/zhuanyongxigua/blog/issues/20)
+- [zhuanyongxigua/blog](https://github.com/zhuanyongxigua/blog)
+- [《Class 的基本语法 - ECMAScript 6 入门》 - 阮一峰](http://es6.ruanyifeng.com/#docs/class)
+- [《如何用一句话说明什么是面向对象思想？》 - 知乎](https://www.zhihu.com/question/19854505)
+- [《什么是对象，为什么要面向对象，怎么才能面向对象？》 - 赵学智](https://www.cnblogs.com/seesea125/archive/2012/04/03/2431176.html)
+- []()
 
 ----
 
