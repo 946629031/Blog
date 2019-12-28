@@ -9,6 +9,7 @@
 ----
 
 参考文章
+- [ES6时代的JavaScript面向对象编程](https://www.jianshu.com/p/c9fcbb41ecb0)
 - [《适合初学者的JavaScript面向对象》 - MDN](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object-oriented_JS)
 - [《js面向对象编程》 - 廖雪峰](https://www.liaoxuefeng.com/wiki/1022910821149312/1023022126220448)
 - [《JavaScript函数式编程之深入理解纯函数》](https://juejin.im/post/5b1a251e6fb9a01e83146ddf)
