@@ -24,6 +24,7 @@
             - 随公司业务不断发展，营销活动、广告、页面改版等需求日益倍增，靠纯人工撸代码已经无法跟上需求增长速度。这时候就需要一个提效工具帮助我们生成代码，推荐一篇介绍可视化界面搭建系统的文章
 
 - ## 2.基础知识点
+    - [video.js H5播放器]()
     - [Dplayer H5播放器 插件](https://dplayer.js.org/#/zh-Hans/)
     - [HTML 5 视频直播一站式扫盲](https://juejin.im/entry/5779fa798ac24700534921b5)
         - 1.H5 到底能不能做视频直播？
@@ -42,6 +43,8 @@
     - [前端｜本地调试H5页面方案总结](https://www.jianshu.com/p/a43417b28280)
 
 - ## 3.进阶
+    - [js中的错误处理（try...catch...finally,异步错误）](https://juejin.im/post/5bfe85786fb9a049c43d5f5f)
+    - []()
     - [「Three.js」看完这篇，你也可以实现一个360度全景插件](https://mp.weixin.qq.com/s/fB4rjG2u9KfYuMxZ4d4Lhg)
     - [彻底理解JavaScript中的require、import和export](https://mp.weixin.qq.com/s/Xihq32H5-x2fTMcLHvjxTQ)
     - [「html2canvas」弹指间，网页灰飞烟灭——Google灭霸彩蛋实现](https://mp.weixin.qq.com/s/eOOEAlVBwO-XAvKF_tlbVQ)
