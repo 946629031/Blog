@@ -104,7 +104,9 @@
 
     - 3.[JavaScript 编程规范(二) - 前端桃园](https://mp.weixin.qq.com/s/AEYqExcDdFteHymXK82SMg)
 
-    - 3.[这些让人抓狂的烂代码，你碰到几种？](https://mp.weixin.qq.com/s/gdIZidCiZU0q8yeaYDEOHg)
+    - 4.[这些让人抓狂的烂代码，你碰到几种？](https://mp.weixin.qq.com/s/gdIZidCiZU0q8yeaYDEOHg)
+
+    - 5.[别乱提交代码了，看下大厂 Git 提交规范是怎么做的！](https://mp.weixin.qq.com/s/IbgsOaJ3xHF-OU1GZYoanw)
 
 - ## 8.面试相关
     - [前端面试高频知识点](https://mp.weixin.qq.com/s/u_rqkG4cHbAKg6h7LwCh-A)
