@@ -45,6 +45,7 @@
     - [九种跨域方式实现原理（完整版）](https://mp.weixin.qq.com/s/dfM7BdU813FkHpZMbMKbfw)
     - [9102了，你还不会移动端真机调试？](https://mp.weixin.qq.com/s/Amz_z56Tj62W-sAdN0-_Hg)
         - [【it work !】如何使用远程调试在Chrome for iOS中调试问题](https://jonsadka.com/blog/how-to-debug-a-chrome-specific-bug-on-ios-using-remote-debugging)
+        - [Safari和Chrome浏览器真机调试iphone中h5页面踩坑之路](https://juejin.im/post/5db198c651882564823fc9c6)
     - [前端｜本地调试H5页面方案总结](https://www.jianshu.com/p/a43417b28280)
 
 - ## 3.进阶
