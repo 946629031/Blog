@@ -44,6 +44,7 @@
     - [JS 异步编程六种方案(原创)](https://mp.weixin.qq.com/s/AP1OQAMowQNa75uwdsI79w)
     - [九种跨域方式实现原理（完整版）](https://mp.weixin.qq.com/s/dfM7BdU813FkHpZMbMKbfw)
     - [9102了，你还不会移动端真机调试？](https://mp.weixin.qq.com/s/Amz_z56Tj62W-sAdN0-_Hg)
+        - [【it work !】如何使用远程调试在Chrome for iOS中调试问题](https://jonsadka.com/blog/how-to-debug-a-chrome-specific-bug-on-ios-using-remote-debugging)
     - [前端｜本地调试H5页面方案总结](https://www.jianshu.com/p/a43417b28280)
 
 - ## 3.进阶
