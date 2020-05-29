@@ -150,6 +150,7 @@
             - 用户反馈的需求
             - 自己想出的需求
     - 2.[【第72期】4 年前端狗 2 年 CTO](https://mp.weixin.qq.com/s/9Ek4NQtKN1uTikE0R4SO0g)
+    - 3.[我在淘宝做前端的这三年 — 第一年](https://zhuanlan.zhihu.com/p/55272391)
 
 - ## 11.插件
     - [Prettier - 代码格式化工具「已达 31.4k star」](https://mp.weixin.qq.com/s/WRkm0UpxP0m9Oxdfn8qO0Q)
