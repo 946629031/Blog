@@ -8,6 +8,16 @@
 
 - [移动端终极适配方案](./4.移动端终极适配方案.md)
 
+- [Vue.js 不支持 IE8 你们是怎么做的？](https://www.zhihu.com/question/51468145/answer/125984111)
+    ```
+    if(document.all)alert('你的浏览器太旧了，恕不奉陪')
+    ```
+    - 实际情况：
+        - 1.首先统计你用户有多少人在用 IE 8，淘宝某些网站 IE 8 用户已经不到 10% 了。
+        - 2.如何可能的话，统计一下这些用户对公司有没有贡献（钱），没有贡献直接让他们升级。
+        - 3.当 IE 8 用户低于5%，直接提示不支持。
+        - 4.如果非要兼容，请一定告诉某些傻逼产品经理：IE 8 上的体验没必要做到跟 Chrome 一样。具体表现： Chrome 上有阴影有圆角有渐变，IE 8 上直接去掉。Chrome 上用原生 API，IE 8 上用 PolyfillChrome 上运行流畅，IE 8 上必须卡，没卡你也要把 IE 8弄卡！这样用户才会知道『IE 8 垃圾』以上，就是一个生命有限的前端工程师对 IE 8 应有的态度。
+
 ----
 **正文开始：**
 
@@ -94,6 +104,11 @@
     - [[布局概念] 关于CSS-BFC深入理解](https://juejin.im/post/5909db2fda2f60005d2093db)
 
 - ## 6.性能优化
+    - [前端性能指标统计 - 【掘金】](https://juejin.im/post/5b5ed5046fb9a04fd343a8c7#heading-7)
+    - [前端资源加载优先级[译] - 【掘金】](https://juejin.im/post/5b3c66705188251b22101f87)
+    - [JavaScript判断图片是否加载完成的三种方式](https://www.cnblogs.com/snandy/p/3704938.html)
+    - []()
+    - []()
     - [【第63期】前端性能优化之雅虎35条军规](https://mp.weixin.qq.com/s/RJbVoKoxeDRgyINdZ8-pmQ)
     - [Chrome运行时性能瓶颈分析](https://mp.weixin.qq.com/s/zHcCF9QV3vbkiC7CieXUKg)
     - [记一次前端性能优化](https://mp.weixin.qq.com/s/CdmhdNy6rhlebEeBvL5ROA)
