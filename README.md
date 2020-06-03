@@ -171,7 +171,35 @@
     - [Prettier - 代码格式化工具「已达 31.4k star」](https://mp.weixin.qq.com/s/WRkm0UpxP0m9Oxdfn8qO0Q)
 
 - ## 12.图形 动画
-    - [深度掌握SVG路径path的贝塞尔曲线指令 -【张鑫旭-鑫空间-鑫生活】](https://www.zhangxinxu.com/wordpress/2014/06/deep-understand-svg-path-bezier-curves-command/)
+    - ### 1.[帧动画的多种实现方式与性能对比 -【掘金】](https://juejin.im/post/5c7bd2646fb9a049cb197921)
+        - #### CSS3帧动画
+            - 连续切换雪碧图位置
+            - 连续移动雪碧图位置（移动端推荐）
+        - #### JS帧动画
+            - 通过JS来控制Canvas图像绘制
+            - 通过JS来控制CSS属性值变化
+        - 可能遇到的问题：[CSS技巧：逐帧动画抖动解决方案](https://aotu.io/notes/2017/08/14/fix-sprite-anim/index.html)
+        
+    - ### 2.animation
+        - 先看个animation的例子 `animation: 3s ease-in 1s 2 reverse both paused slidein;`
+            - [animimation 配置参数文档 【MDN】](https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation)
+        - [如何理解animation-fill-mode及其使用？- 【思否】](https://segmentfault.com/q/1010000003867335)
+            - CSS 属性 `animation-fill-mode` 设置CSS动画在 **执行之前和之后** 如何将样式应用于其目标。
+            - 首先，你要明白动画分为 **初始状态** **等待期** **动画执行期** **完成期** 四个阶段。
+                - **初始状态**, 就是没有触发动画效果时，你元素原本应该有的状态。
+                - **等待期**, 就是 animation-delay 设置的延迟期间。
+                - **动画执行期**, 指的是 delay 结束瞬间开始执行动画，一直持续到最后一帧。
+                - **完成状态**, 执行完最后一帧时，元素处于的状态
+            - animation-fill-mode: none
+            ![](./img/animation/1.animation-fill-mode-none.png)
+            - animation-fill-mode: backwards
+            ![](./img/animation/2.animation-fill-mode-backwards.png)
+            - animation-fill-mode: forwards
+            ![](./img/animation/3.animation-fill-mode-forwards.png)
+            - animation-fill-mode: both
+            ![](./img/animation/4.animation-fill-mode-both.png)
+            
+    - ### 3.[深度掌握SVG路径path的贝塞尔曲线指令 -【张鑫旭-鑫空间-鑫生活】](https://www.zhangxinxu.com/wordpress/2014/06/deep-understand-svg-path-bezier-curves-command/)
         - 效果很赞，同行们都赞不绝口！[「QQ浏览器mac版」](https://browser.qq.com/mac/)
             - 哈，小道消息，此页面是**从界面设计到效果实现完全是一个人完成的**，一个懂CSS3的设计师做出来的产品。
         - 我经常会问求职者，你觉得你脱颖而出的地方是哪里？如果简历中只有显示做了很多网站，我觉得这远远不够！由于没有很多人都讨厌的，被高考拍死的数学逻辑，HTML/CSS的入门实际是很简单（但这种简单的意义非常深远，以后再聊），门槛很低，效果又是所见即所得，容易培养兴趣，所以茫茫中国，会写页面的人何其多。要想脱颖而出，要么有 **万人之上的深度，要么万人玩不来的技能**。
@@ -192,6 +220,142 @@
             | HTML/CSS/JS <br> 后台语言、服务器 | deep <br> good+ | ![](./img/xin/dianfeng.jpg) |
             | 设计 <br> HTML/CSS/JS <br> 数学、动画、图形 <br> 后台语言、服务器 | good+ <br> deep <br> good+ <br> good+ | ![](./img/xin/zhaobudaoduixiang.jpg) |
 
-    - 所以，要想前端有所成，有两条路，
-        - 一是往前，webGL, canvas, SVG领域，这需要对图形敏感，有设计感，有动画素养，有相当的数学知识，以及最重要的JavaScript控制能力；
-        - 一是往后，走开发路线，工具，富应用，运维（数据统计、前端安全、前端部署）领域，这需要懂后台、计算机网络、逻辑思考能力，以及最重要的JavaScript开发功力。
+        - 所以，要想前端有所成，有两条路，
+            - 一是往前，webGL, canvas, SVG领域，这需要对图形敏感，有设计感，有动画素养，有相当的数学知识，以及最重要的JavaScript控制能力；
+            - 一是往后，走开发路线，工具，富应用，运维（数据统计、前端安全、前端部署）领域，这需要懂后台、计算机网络、逻辑思考能力，以及最重要的JavaScript开发功力。
+
+- ## 13.优秀案例
+    - ### 1.音乐播放器
+        - [muhammederdem/mini-player - 【github】](https://github.com/muhammederdem/mini-player)
+        - [在线示例 CodePen](https://codepen.io/JavaScriptJunkie/pen/qBWrRyg)
+        ![](./img/muhammederdem_mini-player.png)
+        ![](https://user-gold-cdn.xitu.io/2019/12/4/16ecc9a64af01633?imageslim)
+        - 阴影效果
+            ```html
+            <div
+                class="player-cover__item"
+                style="background-image: url('https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/1.jpg');"
+            ></div>
+
+            <style>
+                .player-cover__item {
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 15px;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
+                .player-cover__item:before {
+                    content: "";
+                    background: inherit;        /* 重点: 继承背景图，使得阴影颜色丰富, 跟主图相融 */
+                    width: 100%;
+                    height: 100%;
+                    box-shadow: 0px 10px 40px 0px rgba(76, 70, 124, 0.5);
+                    display: block;
+                    z-index: 1;
+                    position: absolute;
+                    top: 30px;
+                    transform: scale(0.9);
+                    filter: blur(10px);         /* 重点: 滤镜-高斯模糊 */
+                    opacity: 0.9;
+                    border-radius: 15px;
+                }
+                .player-cover__item:after {
+                    content: "";
+                    background: inherit;
+                    width: 100%;
+                    height: 100%;
+                    box-shadow: 0px 10px 40px 0px rgba(76, 70, 124, 0.5);
+                    display: block;
+                    z-index: 2;
+                    position: absolute;
+                    border-radius: 15px;
+                }
+            </style>
+            ```
+            - [CSS3 filter(滤镜) 属性 - 【runoob 菜鸟教程】](https://www.runoob.com/cssref/css3-pr-filter.html)
+    - ### 2.`UI` 都夸好的卡片验证库：`vue-interactive-paycard`
+        ![](https://user-gold-cdn.xitu.io/2019/12/4/16ecca8f3e599643?imageslim)
+        - [github 项目地址](https://github.com/muhammederdem/vue-interactive-paycard/issues)
+    - ### 3.锤子手机官网 3D hover 效果
+        - 锤子官网的 banner 的 3D 悬浮效果 确实让不少人眼前一亮，作为一个前端的你当然想知道其实现原理，今天我们就来实现一下这个效果。
+            ![](https://pic1.zhimg.com/80/v2-a570fc160e4529e8c721c248b28d2690_1440w.jpg)
+            - 源码 在线示例 http://js.jirengu.com/negor/4/edit?html,output
+        ```html
+        <div id="test">
+            <div id="banner" >banner</div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+        <script>
+        $('#test').on('mousemove', function(e){
+
+          var offset = $('#test').offset()
+          
+          var x = e.pageX - offset.left
+          var y = e.pageY - offset.top
+          
+          
+          var centerX = $('#test').outerWidth() /2
+          var centerY = $('#test').outerHeight() /2 
+          
+          var deltaX = x - centerX
+          var deltaY = y - centerY
+          
+          var percentX = deltaX / centerX
+          var percentY = deltaY / centerY
+          
+          var deg = 10
+          
+          
+          
+          $('#banner').css({
+            transform: 'rotateX('+deg*-percentY + 'deg)'+
+            ' rotateY('+deg*percentX+'deg)'
+          })
+        })
+
+        $('#test').on('mouseleave', function(){
+          $('#banner').css({
+            transform: ''
+          })
+        })
+        </script>
+        <style>
+        *{box-sizing: border-box;}
+        div#test{
+          width: 100%;
+          height: 500px;
+          background: white;
+          padding: 100px 0; 
+          margin: 100px auto;
+          border: 1px solid #ddd;
+          perspective: 1000px;
+        }
+
+        #banner{
+          height: 300px;
+          width: 400px;
+          margin: 0 auto;
+          background:  #37D7B2;
+          transition: transform 0.1s;
+          box-shadow: 0 0 15px rgba(0,0,0,0.25);
+          text-align: center;
+          line-height: 300px;
+          font-size: 50px;
+          color: #fff;
+        }
+
+        body{
+          background: white;
+          padding: 20px;
+        }
+        </style>
+        ```
+    - ### 4.[阿里妈妈](https://www.alimama.com/index.htm)
+        ![](./img/alimama1.png)
+        ![](./img/alimama2.png)
+        
