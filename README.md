@@ -171,7 +171,28 @@
     - [Prettier - 代码格式化工具「已达 31.4k star」](https://mp.weixin.qq.com/s/WRkm0UpxP0m9Oxdfn8qO0Q)
 
 - ## 12.图形 动画
-    - ### 1.[帧动画的多种实现方式与性能对比 -【掘金】](https://juejin.im/post/5c7bd2646fb9a049cb197921)
+    - ### 1.[前端图像处理指南](https://yq.aliyun.com/articles/68534)
+        - #### canvas位图处理
+        - #### 图像基本处理
+        - #### 图像滤镜处理
+        - #### 图像base64存储
+        - #### 程序员的备胎
+        - #### html2canvas
+        - #### code-to-image
+        - #### Cropper
+        - #### tracking.js
+            - 这是一个专业的计算机视觉处理JS库，包含了大量图形处理算法，可用来做人脸识别，色彩追踪等酷炫功能。
+        - #### qrcode2
+            - 用JS动态生成二维码，这个库还是很实用的，原理就是qrcode算法+canvas绘图，不支持canvas的用table兼容。
+        - #### AlloyImage
+            - 腾讯出的基于HTML5的专业级图像处理开源引擎，功能很强大，简直就是Web版的PS
+        - #### SVG矢量图处理
+            - 目前基于SVG的JS图形库轮子也是非常多，如 `svg.js`, `Snap.svg`, `Velocity.js`, `D3.js` 等等
+        - #### CSS图像处理
+            - 只是用来给用户展示，并不需要存储的话，可以直接用CSS处理
+            - CSS filter - MDN
+
+    - ### 2.[帧动画的多种实现方式与性能对比 -【掘金】](https://juejin.im/post/5c7bd2646fb9a049cb197921)
         - #### CSS3帧动画
             - 连续切换雪碧图位置
             - 连续移动雪碧图位置（移动端推荐）
@@ -180,7 +201,7 @@
             - 通过JS来控制CSS属性值变化
         - 可能遇到的问题：[CSS技巧：逐帧动画抖动解决方案](https://aotu.io/notes/2017/08/14/fix-sprite-anim/index.html)
         
-    - ### 2.animation
+    - ### 3.animation
         - 先看个animation的例子 `animation: 3s ease-in 1s 2 reverse both paused slidein;`
             - [animimation 配置参数文档 【MDN】](https://developer.mozilla.org/zh-CN/docs/Web/CSS/animation)
         - [如何理解animation-fill-mode及其使用？- 【思否】](https://segmentfault.com/q/1010000003867335)
@@ -199,7 +220,7 @@
             - animation-fill-mode: both
             ![](./img/animation/4.animation-fill-mode-both.png)
             
-    - ### 3.[深度掌握SVG路径path的贝塞尔曲线指令 -【张鑫旭-鑫空间-鑫生活】](https://www.zhangxinxu.com/wordpress/2014/06/deep-understand-svg-path-bezier-curves-command/)
+    - ### 4.[深度掌握SVG路径path的贝塞尔曲线指令 -【张鑫旭-鑫空间-鑫生活】](https://www.zhangxinxu.com/wordpress/2014/06/deep-understand-svg-path-bezier-curves-command/)
         - 效果很赞，同行们都赞不绝口！[「QQ浏览器mac版」](https://browser.qq.com/mac/)
             - 哈，小道消息，此页面是**从界面设计到效果实现完全是一个人完成的**，一个懂CSS3的设计师做出来的产品。
         - 我经常会问求职者，你觉得你脱颖而出的地方是哪里？如果简历中只有显示做了很多网站，我觉得这远远不够！由于没有很多人都讨厌的，被高考拍死的数学逻辑，HTML/CSS的入门实际是很简单（但这种简单的意义非常深远，以后再聊），门槛很低，效果又是所见即所得，容易培养兴趣，所以茫茫中国，会写页面的人何其多。要想脱颖而出，要么有 **万人之上的深度，要么万人玩不来的技能**。
