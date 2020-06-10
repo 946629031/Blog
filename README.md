@@ -71,6 +71,8 @@
     - [深入理解 DOM 事件机制](https://mp.weixin.qq.com/s/kMCPPnTUbq5AwKIfT2OP7Q)
     - [深入理解JavaScript作用域和作用域链](https://mp.weixin.qq.com/s/j0UW9lHn32Tz-rowkWDhiQ)
     - [图解原型链及其继承](https://mp.weixin.qq.com/s/1D8RZvxmXuq_r6V_o2jiFw)
+    - [TypeScript安利指南](https://juejin.im/post/5d8efeace51d45782b0c1bd6)
+    - [TS in JS 实践指北](https://juejin.im/post/5e0176b4f265da33a159d9e0)
 
 - ## 4.框架
     - [从头开始学习Vuex](https://mp.weixin.qq.com/s/c2bV5fs_u93V9s11weox9g)
