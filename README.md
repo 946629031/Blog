@@ -413,7 +413,7 @@
 
 ----
 
-# markdown 目录结构表示法
+# markdown 目录结构表示法 优秀的两种表示方法
 ```
 Nuxt.js 项目目录结构
 + |- /assets          // 用于组织未编译的静态资源如LESS、SASS或JavaScript
