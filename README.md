@@ -410,3 +410,37 @@
 - 3.关于 defer，此图未尽之处在于它是按照加载顺序执行脚本的，这一点要善加利用
 - 4.async 则是一个乱序执行的主，反正对它来说脚本的加载和执行是紧紧挨着的，所以不管你声明的顺序如何，只要它加载完了就会立刻执行
 - 5.仔细想想，async 对于应用脚本的用处不大，因为它完全不考虑依赖（哪怕是最低级的顺序执行），不过它对于那些可以不依赖任何脚本或不被任何脚本依赖的脚本来说却是非常合适的，最典型的例子：Google Analytics
+
+----
+
+# markdown 目录结构表示法 优秀的两种表示方法
+```
+Nuxt.js 项目目录结构
++ |- /assets          // 用于组织未编译的静态资源如LESS、SASS或JavaScript
++ |- /components      // 用于自己编写的Vue组件，比如波动组件、日历组件、分页组件
++ |- /layouts         // 布局目录，用于组织应用的布局组件，不可更改
++ |- /middleware      // 用于存放中间件
++ |- /pages           // 用于存放写的页面，我们主要的工作区域
++ |- /plugins         // 用于存放JavaScript插件的地方
++ |- /static          // 用于存放静态资源文件，比如图片
++ |- /store           // 用于组织应用的Vuex 状态管理
+|- .editorconfig      // 开发工具格式配置
+|- .eslintrc.js       // ESLint的配置文件，用于检查代码格式
+|- .gitignore         // 配置git不上传的文件
+|- nuxt.config.json   // 用于组织Nuxt.js应用的个性化配置，已覆盖默认配置
+|- package-lock.json  // npm自动生成，用于帮助package的统一设置的，yarn也有相同的操作
+|- package.json       // npm 包管理配置文件
+|- .nuxt              // Nuxt自动生成，临时的用于编辑的文件，build
+```
+
+```
+src
+├── components
+│   ├── Foo.vue
+│   ├── Bar.vue
+│   └── Baz.vue
+├── App.vue
+├── app.js # 通用 entry(universal entry)
+├── entry-client.js # 仅运行于浏览器
+└── entry-server.js # 仅运行于服务器
+```
