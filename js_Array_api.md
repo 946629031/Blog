@@ -1,3 +1,5 @@
+# Array Api
+
 - **`Array.filter()`**<br>
     filter() 方法返回一个新数组, 其包含 通过函数测试 的所有元素<br>
     `filter()` 其实就是 `Array.findAll()`
@@ -48,6 +50,17 @@
     pets.includes('at') // false
     ```
     - https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
+
+- **`Array.map()`**<br>
+    从对象数组中提取属性值为数组? js array 只取其中一个值
+    ```js
+    var objArray = [ { foo: 1, bar: 2}, { foo: 3, bar: 4}, { foo: 5, bar: 6} ];
+    
+    var result = objArray.map(a => a.foo);
+    // [1, 3, 5]
+    ```
+
+
 
 
 - Math round()、ceil()、floor()、三个函数的区别
@@ -101,3 +114,97 @@
     // 差集
     let difference = a.concat(b).filter(v => !a.includes(v) || !b.includes(v)) // [1,3,4,5]
     ```
+
+
+
+----
+
+# String Api
+
+- **`String.trim()`**
+    - `trim()` 方法会从一个字符串的 两端删除空白字符
+    - 在这个上下文中的空白字符是所有的空白字符 (space, tab, no-break space 等) 以及所有行终止符字符（如 LF，CR等）。
+    ```js
+    const greeting = '   Hello world!   '
+
+    console.log(greeting) // "   Hello world!   ";
+
+    greeting.trim()       // "Hello world!";
+    ```
+    https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+
+
+
+- **`String.charAt()`**
+    - `charAt()` 方法从一个字符串中返回指定的字符
+    ```js
+    str.charAt(index)
+
+    var anyString = "Brave new world"
+    anyString.charAt(0)  // 'B'
+    anyString.charAt(1)  // 'r'
+    anyString.charAt(2)  // 'a'
+    ```
+    https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/charAt
+
+- js 截取字符串<br>
+    - **`String.substring()`**
+    - **`String.slice()`**
+    - **`String.substr()`**
+    - `substring(from, to)` 方法从 from 位置截取到 to 位置，to 可选，没有设置时默认到末尾。
+        ```js
+        var str = "www.runoob.com!"
+        str.substring(4)    // 从第 5 个字符开始截取到末尾
+        str.substring(4,10) // 从第 5 个字符开始截取到第10个字符
+        ```
+    - `slice(start,end)` 方法用于提取字符串的某个部分（从参数 start 到 end 位置），并以新的字符串返回被提取的部分。类似 substring()。
+        ```js
+        var str = "www.runoob.com!";
+        str.slice(4)    // 从第 5 个字符开始截取到末尾
+        str.slice(4,10) // 从第 5 个字符开始截取到第10个字符
+        ```
+    - `substr()` 方法可在字符串中截取从开始下标开始的指定数目的字符。
+        ```js
+        var str = "www.runoob.com!";
+        str.substr(4,6) // 从第 4 个字符开始截取6个字符
+        ```
+    - https://www.runoob.com/w3cnote/js-extract-string.html
+
+----
+
+# Object Api
+
+- **`hasOwnProperty`**
+    - Object的 `hasOwnProperty()` 方法返回一个布尔值，判断对象是否包含特定的自身（非继承）属性。
+
+
+
+
+
+
+
+
+
+
+- set 数组去重
+```js
+const arr = [1,2,3,4,2,3,1]
+[...new Set(arr)]
+```
+
+## 8.对象
+```js
+Object.keys()
+Object.entries({name: 'imooc', age: 1}) // 遍历？
+
+// 获取列表头和尾
+const [head, ...tail] = [1, 2, 3]
+const [last, ...initial] = [1, 2, 3].reverse()
+```
+
+
+- js判断数组或对象中的key是否存在
+```js
+ Array.hasOwnProperty(key)
+Object.hasOwnProperty(key)
+```
