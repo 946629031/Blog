@@ -444,3 +444,15 @@ src
 ├── entry-client.js # 仅运行于浏览器
 └── entry-server.js # 仅运行于服务器
 ```
+
+- vscode 折叠代码快捷键
+  - 方法1:
+    ```js
+    Command + option + [  // 折叠 光标所在代码块
+    Command + option + ]  // 展开 光标所在代码块
+    ```
+
+  - 方法2:
+    - mac下，command + k + 0，折叠所有代码块
+       - 0是代码折叠级别，同理可以换用1，2，3 等
+    - command + k + j，展开所有代码块。
