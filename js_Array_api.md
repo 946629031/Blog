@@ -170,12 +170,86 @@
         ```
     - https://www.runoob.com/w3cnote/js-extract-string.html
 
+- ## 字符串 使用正则
+    - ### `String.prototype.match()`：找到一个或多个正则表达式的匹配
+        - 非全局匹配时，多次执行结果一样，都返回首次匹配结果，忽略 lastIndex：
+        ```js
+        let regex = /test/;
+        let str = '_test_test';
+
+        str.match(regex); // ["test", index: 1, input: "_test_test"] 
+        regex.lastIndex   // 0
+
+        str.match(regex); // ["test", index: 1, input: "_test_test"]
+        regex.lastIndex   // 0
+        ```
+        - 全局匹配时，该方法返回所有匹配结果，并忽略 lastIndex：
+        ```js
+        let regex = /test/g;
+        let str = '_test_test';
+
+        str.match(regex); // ["test", "test"]
+        regex.lastIndex   // 0
+
+        str.match(regex); // ["test", "test"]
+        regex.lastIndex   // 0
+
+        str.match(regex); // ["test", "test"]
+        regex.lastIndex   // 0
+        ```
+    - ### `String.prototype.replace()`：替换与正则表达式匹配的子串
+        - 如果没有设置全局匹配，那么将替换首次匹配的位置；如果设置了全局匹配，那么将替换所有匹配位置：
+        ```js
+        // 非全局匹配
+        '_test_test'.replace(/test/, 'r');  // '_r_test'
+
+        // 全局匹配
+        '_test_test'.replace(/test/g, 'r'); // '_r_r'
+        ```
+    - ### `String.prototype.search()`：查找匹配位置
+        - 该方法将忽略全局设置项，简单地返回首次匹配的位置：
+        ```js
+        let regex = /test/;
+        let str = '_test_test';
+        str.search(regex); // 1
+
+        let regex = /test/g;
+        let str = '_test_test';
+        regex.lastIndex;   //  0
+        str.search(regex); // 1
+        regex.lastIndex;   //  0，因为该方法忽略了全局设置项
+        ```
+
+
 ----
 
 # Object Api
 
-- **`hasOwnProperty`**
+- ## **`hasOwnProperty`**
     - Object的 `hasOwnProperty()` 方法返回一个布尔值，判断对象是否包含特定的自身（非继承）属性。
+
+- ## **`delete`** 删除对象的某个属性
+    - **`delete`** 操作符用于删除对象的某个属性；如果没有指向这个属性的引用，那它最终会被释放。
+    ```js
+    // 语法
+    delete object.property
+    delete object['property']
+
+    返回值 true or false
+    ```
+    ```js
+    const Employee = {
+        firstname: 'John',
+        lastname: 'Doe'
+    }
+
+    console.log(Employee.firstname) // John
+
+    delete Employee.firstname
+
+    console.log(Employee.firstname) // undefined
+    ```
+    - https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete
 
 
 
