@@ -1,6 +1,24 @@
+- 目录
+    - [Array Api](#Array-Api)
+        - [Array.filter()](#Arrayfilter)
+        - [Array.find()](#Arrayfind)
+        - [Array.findIndex()](#ArrayfindIndex)
+        - [Array.includes()](#Arrayincludes)
+        - [Array.map()](#Arraymap)
+        - [Array.sort() 排序](#Arraysort-排序)
+        - []()
+    - [String Api](#String-Api)
+    - [Object Api](#Object-Api)
+        - []()
+        - []()
+        - []()
+        - []()
+        - []()
+----
+
 # Array Api
 
-- **`Array.filter()`**<br>
+- ## **`Array.filter()`**
     filter() 方法返回一个新数组, 其包含 通过函数测试 的所有元素<br>
     `filter()` 其实就是 `Array.findAll()`
     ```js
@@ -11,7 +29,7 @@
     ```
     - https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 
-- **`Array.find()`**<br>
+- ## **`Array.find()`**
     获取数组中年龄大于 18 的第一个元素
 
     ```js
@@ -25,7 +43,7 @@
     ```
     https://www.runoob.com/jsref/jsref-find.html
 
-- **`Array.findIndex()`**<br>
+- ## **`Array.findIndex()`**
     获取数组中年龄大于等于 18 的第一个元素索引位置
 
     ```js
@@ -39,7 +57,7 @@
     ```
     https://www.runoob.com/jsref/jsref-findindex.html
 
-- **`Array.includes()`**<br>
+- ## **`Array.includes()`**
     方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回 true，否则返回false
     ```js
     const array1 = [1, 2, 3]
@@ -51,7 +69,7 @@
     ```
     - https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 
-- **`Array.map()`**<br>
+- ## **`Array.map()`**
     从对象数组中提取属性值为数组? js array 只取其中一个值
     ```js
     var objArray = [ { foo: 1, bar: 2}, { foo: 3, bar: 4}, { foo: 5, bar: 6} ];
@@ -59,6 +77,56 @@
     var result = objArray.map(a => a.foo);
     // [1, 3, 5]
     ```
+
+- ## **`Array.sort()`** 排序
+    - [Array.sort() , w3school 参考链接](https://www.w3school.com.cn/js/js_array_sort.asp)
+    - `sort()` 方法 **`以字母顺序`** 对数组进行排序：
+    - ### 字符串排序
+        ```js
+        var fruits = ["Banana", "Orange", "Apple", "Mango"];
+        fruits.sort();            ['Apple', 'Banana', 'Mango', 'Orange'] // 对 fruits 中的元素进行排序
+        fruits.reverse();         // 反转元素顺序
+        ```
+    - ### 数字排序
+        默认地, `sort()` 函数 **`按照字符串顺序`** 对值进行排序
+
+        该函数很适合字符串（"Apple" 会排在 "Banana" 之前）。
+
+        不过，如果数字按照字符串来排序，则 "25" 大于 "100"，因为 "2" 大于 "1"。
+
+        正因如此，sort() 方法在对数值排序时会产生不正确的结果。
+
+        我们通过一个比值函数来修正此问题：
+
+        实例
+        ```js
+        var points = [40, 100, 1, 5, 25, 10];
+        points.sort(function(a, b){return a - b}); 
+        ```
+    - ### 排序对象数组
+        - JavaScript 数组经常会包含对象：
+            ```js
+            var cars = [
+                { type: "Volvo", year: 2016 },
+                { type: "Saab", year: 2001 },
+                { type: "BMW", year: 2010 }
+            ]
+            ```
+        - 通过比较函数来对比属性值
+            ```js
+            cars.sort(function(a, b){return a.year - b.year});
+            ```
+        - 比较字符串属性会稍复杂：
+            - ### **`sort 函数的核心`**
+            ```js
+            cars.sort(function(a, b){
+                var x = a.type.toLowerCase();
+                var y = b.type.toLowerCase();
+                if (x < y) {return -1;}
+                if (x > y) {return 1;}
+                return 0;
+            })
+            ```
 
 
 
@@ -101,8 +169,23 @@
             })
         });
         ```
+    - 求 只在 a数组 中，而不在 b数组 中的元素
+        - （即：获取A数组中不包含B数组的元素）
+        ```js
+        // 求 只在 a数组 中，而不在 b数组 中的元素
+        let a = [1,2,3,4]
+        let b = [1, 3]
+
+        let result = a.filter( item => {
+            return b.every( elem => item != elem)
+        })
+        // [2, 4]
+        ```
 - [JS数组求并集，交集和差集(ES7/ES6/ES5)](https://blog.csdn.net/qq_35430000/article/details/88046136)
     ```js
+    let a = [1, 2, 3]
+    let b = [2, 4, 5]
+
     // ES7
 
     // 并集
@@ -111,7 +194,7 @@
     // 交集
     let intersection = a.filter(v => b.includes(v)) // [2]
     
-    // 差集
+    // 差集 ???
     let difference = a.concat(b).filter(v => !a.includes(v) || !b.includes(v)) // [1,3,4,5]
     ```
 
