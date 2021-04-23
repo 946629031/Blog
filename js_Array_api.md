@@ -22,35 +22,35 @@
 
 # Array Api
 
-- # 123
-- ### 七、for...of + Object (性能最高的去重方法)
-    - 这个方法我只在一些文章里见过，实际工作中倒没怎么用
-    - 首先创建一个空对象，然后用 for 循环遍历
-    - 利用对象的属性不会重复这一特性，校验数组元素是否重复
-    ```js
-    function distinct(a, b) {
-        let arr = a.concat(b)
-        let result = []
-        let obj = {}
+- ## [JavaScript 高性能数组去重](https://www.cnblogs.com/wisewrong/p/9642264.html)
+    - ### 七、for...of + Object (性能最高的去重方法)
+        - 这个方法我只在一些文章里见过，实际工作中倒没怎么用
+        - 首先创建一个空对象，然后用 for 循环遍历
+        - 利用对象的属性不会重复这一特性，校验数组元素是否重复
+        ```js
+        function distinct(a, b) {
+            let arr = a.concat(b)
+            let result = []
+            let obj = {}
 
-        for (let i of arr) {
-            if (!obj[i]) {
-                result.push(i)
-                obj[i] = 1
+            for (let i of arr) {
+                if (!obj[i]) {
+                    result.push(i)
+                    obj[i] = 1
+                }
             }
+
+            return result
         }
+        ```
+        当我看到这个方法的处理时长，我又傻眼了
+        - ![](https://img2018.cnblogs.com/blog/1059788/201809/1059788-20180920144241545-1967025696.png)
 
-        return result
-    }
-    ```
-    当我看到这个方法的处理时长，我又傻眼了
-    ![](https://img2018.cnblogs.com/blog/1059788/201809/1059788-20180920144241545-1967025696.png)
+        15W 的数据居然只要 16ms ？？？ 比 Set() 还快？？？
 
-    15W 的数据居然只要 16ms ？？？ 比 Set() 还快？？？
-
-    然后我又试了试 150W 的数据量...
-    ![](https://img2018.cnblogs.com/blog/1059788/201809/1059788-20180920144417481-1569178817.png)
-    emmmmmmm.... 惹不起惹不起...
+        然后我又试了试 150W 的数据量...
+        - ![](https://img2018.cnblogs.com/blog/1059788/201809/1059788-20180920144417481-1569178817.png)
+        emmmmmmm.... 惹不起惹不起...
 
 - ## **`Array.filter()`**
     filter() 方法返回一个新数组, 其包含 通过函数测试 的所有元素<br>
