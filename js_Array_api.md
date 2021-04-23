@@ -1,5 +1,6 @@
 - 目录
     - [Array Api](#Array-Api)
+        - [JavaScript 高性能数组去重](https://www.cnblogs.com/wisewrong/p/9642264.html)
         - [Array.filter()](#Arrayfilter)
         - [Array.find()](#Arrayfind)
         - [Array.findIndex()](#ArrayfindIndex)
@@ -14,9 +15,42 @@
         - []()
         - []()
         - []()
+    - 通用方法
+        - [for in](#for-in)
+        - [for of](#for-of)
 ----
 
 # Array Api
+
+- # 123
+- ### 七、for...of + Object (性能最高的去重方法)
+    - 这个方法我只在一些文章里见过，实际工作中倒没怎么用
+    - 首先创建一个空对象，然后用 for 循环遍历
+    - 利用对象的属性不会重复这一特性，校验数组元素是否重复
+    ```js
+    function distinct(a, b) {
+        let arr = a.concat(b)
+        let result = []
+        let obj = {}
+
+        for (let i of arr) {
+            if (!obj[i]) {
+                result.push(i)
+                obj[i] = 1
+            }
+        }
+
+        return result
+    }
+    ```
+    当我看到这个方法的处理时长，我又傻眼了
+    ![](https://img2018.cnblogs.com/blog/1059788/201809/1059788-20180920144241545-1967025696.png)
+
+    15W 的数据居然只要 16ms ？？？ 比 Set() 还快？？？
+
+    然后我又试了试 150W 的数据量...
+    ![](https://img2018.cnblogs.com/blog/1059788/201809/1059788-20180920144417481-1569178817.png)
+    emmmmmmm.... 惹不起惹不起...
 
 - ## **`Array.filter()`**
     filter() 方法返回一个新数组, 其包含 通过函数测试 的所有元素<br>
@@ -365,3 +399,118 @@ const [last, ...initial] = [1, 2, 3].reverse()
  Array.hasOwnProperty(key)
 Object.hasOwnProperty(key)
 ```
+
+
+- # Js中for in 和for of的区别
+- 对数组的遍历大家最常用的就是for循环，ES5的话也可以使用forEach，ES5具有遍历数组功能的还有map、filter、some、every、reduce、reduceRight等，只不过他们的返回结果不一样。但是使用foreach遍历数组的话，使用break不能中断循环，使用return也不能返回到外层函数。
+
+- 那么接下来我们一起看一下for in 和for of 的区别吧。
+
+- ## for in
+    看一个简单的例子
+    ```js
+    //for in 数组
+    Array.prototype.sayHello = function(){
+        console.log("Hello")
+    }
+    Array.prototype.str = 'world';
+    var myArray = [1,2,10,30,100];
+    myArray.name='数组';
+
+    for(let index in myArray){
+        console.log(index);
+    }
+    //输出结果如下
+    0,1,2,3,4,name,str,sayHello
+
+
+
+
+    //for in  对象
+    Object.prototype.sayHello = function(){
+        console.log('Hello');
+    }
+    Object.prototype.str = 'World';
+    var myObject = {name:'zhangsan',age:100};
+
+    for(let index in myObject){
+        console.log(index);
+    }
+    //输出结果
+    name,age,str,sayHello
+    //首先输出的是对象的属性名，再是对象原型中的属性和方法，
+
+
+
+    //如果不想让其输出原型中的属性和方法，可以使用hasOwnProperty方法进行过滤
+    for(let index in myObject){
+        if(myObject.hasOwnProperty(index)){
+            console.log(index)
+        }
+    }
+    //输出结果为
+    name,age
+
+
+    //你也可以用Object.keys()方法获取所有的自身可枚举属性组成的数组。
+    Object.keys(myObject)
+    ```
+
+    - 可以看出 `for in` 应用于数组循环返回的是数组的 **`下标`** 和数组的 **`属性`** 和 **`原型上的方法和属性`**，
+    - 而 `for in` 应用于对象循环返回的是对象的 **`属性名`** 和 **`原型中的方法和属性`** 
+
+    - 使用 `for in` 也可以遍历 `数组`，但是会存在以下问题：
+
+        - 1.index索引为 `字符串型数字`，不能直接进行几何运算
+
+        - 2.遍历顺序有 `可能不是按照实际数组的内部顺序`
+
+        - 3.使用 `for in` 会遍历数组 **`所有的可枚举属性`**，包括原型。例如 原型 `方法method` 和 `name属性`
+
+- ## for of
+    ```js
+    Object.prototype.sayHello = function(){
+        console.log('Hello');
+    }
+    var myObject = {
+        name:'zhangsan',
+        age:10
+    }
+
+    for(let key of myObject){
+        consoloe.log(key);
+    }
+    //输出结果
+    // Uncaught TypeError: myObject is not iterable  对象不可被遍历 / 对象不可迭代
+
+    Array.prototype.sayHello = function(){
+        console.log("Hello");
+    }
+    var myArray = [1,200,3,400,100];
+    for(let key of myArray){
+        console.log(key);
+    }
+    //输出结果
+    1,200,3,400,100
+    ```
+
+
+    for in遍历的是数组的索引（即键名），而for of遍历的是数组元素值。 所以for in更适合遍历对象，不要使用for in遍历数组。
+
+- ## [检查一个对象是否可迭代](https://blog.csdn.net/sinat_36246371/article/details/103671711)
+    检查一个对象是否可迭代，也就是说这个对象是否可用迭代器遍历，比如字符串，数组...
+
+    怎么检查，很简单，只要看看 `对象` 下面 `Symbol.iterator` 是不是 `function` 就行了：
+
+    ```js
+    const isIterable = obj =>
+            obj != null && 
+            typeof obj[Symbol.iterator] === 'function';
+    ```
+    测试：
+    ```js
+    isArrayLike(document.querySelectorAll('.className')); // true
+    isArrayLike('abc'); // true
+    isArrayLike(null); // false
+    ```
+
