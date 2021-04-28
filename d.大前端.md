@@ -45,7 +45,7 @@
         <td>安全</td>
     </tr>
     <tr>
-        <th>跨标签页</th>
+        <th>跨标签页<br>(作用域)</th>
         <td colspan="2" align='center'>可跨标签页<br>不可跨域</td>
         <td>不可跨标签页<br>不可跨域</td>
         <td>可跨标签页<br>不可跨域</td>
@@ -62,6 +62,12 @@
         <td>4kb</td>
         <td>5Mb</td>
         <td>5Mb</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>安全性</th>
+        <td>Cookie中 最好不要放置任何明文的东西</td>
+        <td colspan="2" align='center'>两个Storage的数据提交后，在服务器端一定要校验<br>（其实任何 payload 和 qs 里的参数都要校验）</td>
         <td></td>
     </tr>
 </table>
