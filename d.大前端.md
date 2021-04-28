@@ -6,7 +6,7 @@
     - []()
 
 # 怎么让刷新后 数据不变？本地持久化, Cookie, Session, LocalStorage
-- 小结目录
+- 小节目录
     - [1.Cookie](#1.Cookie)
     - [2.Session](#2.Session)
     - [3.LocalStorage 和 SessionStorage](#3.LocalStorage-和-SessionStorage)
@@ -17,6 +17,56 @@
     > **vuex** 是各个组件间的数据共享机制<br>
     > 如果数据不大，可以存本地；<br>
     > 如果数据比较大, 可以存 token 或 Data ID, 在刷新页面的时候 一并取回
+
+
+- ## Cookie, LocalStorage, SessionStorage 和 Session 的区别 异同点 优缺点
+<table>
+    <tr>
+        <td></td>
+        <th>Cookie</th>
+        <th>LocalStorage</th>
+        <th>SessionStorage</th>
+        <th>Session</th>
+    </tr>
+    <tr>
+        <th>共同点</th>
+        <td colspan="4" align='center'>key-value 方式存储、同域名可用</td>
+    </tr>
+    <tr>
+        <th>储存位置</th>
+        <td colspan="3" align='center'>客户端</td>
+        <td>服务端</td>
+    </tr>
+    <tr>
+        <th>特点</th>
+        <td>随请求头每次提交<br>（弊端：如果使用cookie保存过多数据会带来性能问题）</td>
+        <td>不随请求头提交<br>可长时保存</td>
+        <td>不随请求头提交<br>页面关闭即失效</td>
+        <td>安全</td>
+    </tr>
+    <tr>
+        <th>跨标签页</th>
+        <td colspan="2" align='center'>可跨标签页<br>不可跨域</td>
+        <td>不可跨标签页<br>不可跨域</td>
+        <td>可跨标签页<br>不可跨域</td>
+    </tr>
+    <tr>
+        <th>生命周期</th>
+        <td>一般又服务器生成，可设置失效时间。<br>如果在浏览器端生成Cookie，默认是关闭浏览器后失效</td>
+        <td>除非被清除，否则永久保存</td>
+        <td>仅在当前会话下有效，刷新页面同样存在，但关闭浏览器或者关闭页面之后会数据清除</td>
+        <td></td>
+    </tr>
+    <tr>
+        <th>存放数据大小</th>
+        <td>4kb</td>
+        <td>5Mb</td>
+        <td>5Mb</td>
+        <td></td>
+    </tr>
+</table>
+
+
 - ## 1.Cookie
     - 如果数据比较大的话，在 Cookie里 可以存一个 Session ID, 在刷新的时候把 Session ID 的内容一起取回来
     - #### 为什么有 Cookie ?
@@ -258,38 +308,6 @@
 
             - 场景2: 如果用户在A页面打开的情况下，手动打开了一个新标签页，访问A页面，此时会重开一个新回话，二者sessionStorage是不共享的。
 
-- ## Cookie, LocalStorage, SessionStorage 和 Session 的区别 异同点 优缺点
-    <table>
-        <tr>
-            <td></td>
-            <th>Cookie</th>
-            <th>LocalStorage</th>
-            <th>SessionStorage</th>
-            <th>Session</th>
-        </tr>
-        <tr>
-            <th>共同点</th>
-            <td colspan="4" align='center'>key-value 方式存储、同域名可用</td>
-        </tr>
-        <tr>
-            <th>储存位置</th>
-            <td colspan="3" align='center'>客户端</td>
-            <td>服务端</td>
-        </tr>
-        <tr>
-            <th>特点</th>
-            <td>随请求头每次提交</td>
-            <td>不随请求头提交<br>可长时保存</td>
-            <td>不随请求头提交<br>页面关闭即失效</td>
-            <td>安全</td>
-        </tr>
-        <tr>
-            <th>跨标签页</th>
-            <td colspan="2" align='center'>可跨标签页<br>不可跨域</td>
-            <td>不可跨标签页<br>不可跨域</td>
-            <td>可跨标签页<br>不可跨域</td>
-        </tr>
-    </table>
 
 - ## 4.token
 
