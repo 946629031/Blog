@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-09 15:14:55
- * @LastEditTime: 2022-02-09 17:40:16
+ * @LastEditTime: 2022-02-09 17:59:10
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /Blog/JAVA入门.md
@@ -69,7 +69,7 @@
 
 # 第10讲相关的概念
 - ## JDK 的目录结构
-    > 打开 JDK 安装目录
+    > 打开 Java11 JDK 安装目录
 
     - bin ==> binary 二进制
     - conf ==> config 配置文件
@@ -98,4 +98,28 @@
     - lib目录 - 该目录下主要存放了JDK工具的一-些补充jar包和源代码
     ```
 
-    > Java11 和 Java8 的目录结构是不一样的
+    > Java 11 和 Java 8 的目录结构是不一样的 <br>
+    > Java 11 的 JDK 目录下 没有 JRE, 和 Java 8 不一样
+
+- ## JDK
+    - 称为Java开发工具包 (Java Development Kit)。
+    - Java开发人士需要下载和安装JDK ,目前的主流版本为JDK11。
+
+- ## JRE
+    - 称之为Java SE **`运行时环境`** (Java SE Runtime Environment)
+    - 提供了运行Java应用程序所必须的软件环境等。无论是开发还是运行Java应用都必须安装。
+
+
+    > 开发过程 可以只用 JDK <br>
+    > 运行时 必须有 JRE <br>
+    > 开发好的 Java 程序, 在客户端上运行 可以只有 JRE 就行 <br>
+
+- ## JVM
+    - Java 虚拟机, Java Virtual Machine
+- ## javac.exe
+    - 编译器, 主要用于 将高级Java源代码 翻译成字节码文件
+- ## java.exe
+    - 解释器, 主要用于 启动JVM 对字节码文件 进行解释并执行
+
+- JDK, JRE, JVM 之间的关系
+- ![](img/java/1.jpg)
