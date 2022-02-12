@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-09 15:14:55
- * @LastEditTime: 2022-02-10 17:51:36
+ * @LastEditTime: 2022-02-12 09:56:27
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /Blog/JAVA入门.md
@@ -218,7 +218,7 @@
 ## 常见的错误 和 简化的编译运行
 - ### 常见的错误
     - `错误:需要class, interface或enum` => 通常都是class关键字拼写错误
-    - `错误:找不到符号` => 通常因为单词拼写错误或Java中不支持这样的单词
+    - `错误:找不到符号` => 通常因为单词拼写错误 或 该变量不存在 或 Java中不支持这样的单词
     - `错误:需要';'` =>通常都是因为少写分号，加上英文版分号即可
     - `错误:非法字符: "\uff1b'` =>通常是因为出现了中文标点符号,修改为英文版即可
     - `错误:在类 PrintTest 中找不到 main方法`, 请将 main 方法定义为: => main 写成了 mian
@@ -262,5 +262,317 @@
 - Java字节码 可以通过 `JVM` 翻译为 具体平台能够执行的机器指令。由于Sun定义了JVM规范,而且不同的操作系统大多提供了 **`JVM实现`**, 才使得相同的一个字节码文件可以在不同的系统上运行,从而使Java赢得了 **`”一次编译，到处使用”`** 的美名。
 - ![](img/java/3.jpg)
 
+## 总计
+- 1.计算机的体系结构(常识)
+    - 计算机的概念、硬件、软件、结构图
+- 2.Java语言的概述(常识)
+    - 计算机语言的发展、Java语言的发展、主要版本
+- 3开发环境的搭建和使用(重点)
+    - **`jdk、 jre、 javac.exe、 java.exe`** 编写Java程序的流程、 快捷键和注释、环境变量的配置、**`跨平台原理`**
 
 
+# 变量和数据类型
+## 第1讲 变量的基本概念
+- 当需要在程序中记录单个数据内容时，则声明一个变量即可，而声明变量的本质就是在 **`内存`** 中申请一个 **`存储单元`**, 由于该存储单元中的数据内容可以发生改变,因此得名为"变量"。
+    - 类似于 去超市买东西时，申请一个柜子，用来放随身物品、行李
+- 由于存放的数据内容大小不一样, 导致所需存储单元的大小不一-样, 在Java语言中使用数据类型加以描述，**`为了便于下次访问`** 还需要给该变量 **`指定一个名字`** （**`变量名`**），用于记录该变量对应的存储单元。
+
+## 第2讲 变量的声明方式
+- 语法
+    ```
+    数据类型 变量名 = 初始值;
+    ```
+    - 其中 **= 初始值** 可以省略。 (但是不写时 某些情况可能出现问题，所以能写时 尽量写上)
+    - 但 **`;`** 不可以省略
+- 变量的特点 (变量的注意事项)
+    - Java是强类型语言，变量在使用前必须声明来指明其数据类型。
+    - 变量在使用之前必须初始化。
+    - 变量不能重复声明
+```java
+public class VarTest {
+
+    public static void main (String[] args) {
+        
+        // 1.声明一个变量并初始化   数据类型 变量名 = 初始化;
+        int age = 18;
+
+        System.out.println("年龄 =" + age);
+    }
+}
+```
+
+- 注意事项
+    - 如果我打印一个 不存在的变量 name
+        ```java
+        public class VarTest {
+
+            public static void main (String[] args) {
+                
+                // 1.声明一个变量并初始化   数据类型 变量名 = 初始化;
+                int age = 18;
+
+                System.out.println("年龄 =" + age);
+                System.out.println("年龄 =" + name);
+            }
+        }
+        ```
+        - 则会报如下的错 (error: 找不到符号)
+            ```
+            <<< javac VarTest.java
+            >>> VarTest.java:17: error: cannot find symbol
+                    System.out.println("年龄 =" + name);
+                                                ^
+            symbol:   variable name
+            location: class VarTest
+            1 error
+            ```
+    - 如果我打印一个 未初始化的变量
+        ```java
+        public class VarTest {
+
+            public static void main (String[] args) {
+                
+                // 1.声明一个变量并初始化   数据类型 变量名 = 初始化;
+                int age = 18;
+
+                System.out.println("年龄 =" + age);
+
+                String name;
+                System.out.println("年龄 =" + name);
+            }
+        }
+        ```
+        - 则会报如下的错 (error: 可能尚未初始化变量name)
+        ```
+        <<< javac VarTest.java
+        >>> VarTest.java:19: error: variable name might not have been initialized
+        System.out.println("年龄 =" + name);
+                                    ^
+        1 error
+        ```
+
+
+## 第3讲 标识符的命名法则
+> 标识符: 变量名、类名、属性名、方法名、包名?
+- 标识符的命名法则(笔试) (**`变量名`** 的取名规则)
+    - 由字母、数字、下划线以及$等组成,其中数字不能开头(后面讲到)。
+    - 不能使用Java语言的关键字, 所谓关键字就是Java语言用于表示特殊含义的单词。
+    - 区分大小写，长度没有限制 但不宜过长。
+    - 尽量做到见名知意，支持中文但不推荐使用。
+- Java 语言中的关键字 (50个)
+    ```java
+    abstract
+    boolean
+    break
+    byte
+    case
+    catch
+    char
+    class
+    const
+    continue
+    default
+    do
+    double
+    else
+    extends
+    final
+    finally
+    float
+    for
+    goto
+    if
+    implements
+    import
+    instanceof
+    int
+    interface
+    long
+    native
+    new
+    package
+    private
+    protected
+    public
+    return
+    short
+    static
+    strictfp
+    super
+    switch
+    synchronized
+    this
+    throw
+    throws
+    transient
+    try
+    void
+    volatile
+    while
+    assert
+    enum
+    ```
+
+## 第4讲 变量输入输出的案例实现
+- 案例题目
+    - 提示用户从键盘输入自己的姓名和年龄信息并打印出来。
+    ```java
+    /*
+       编程实现 变量的输入输出
+    */
+
+    // 导入java目录中的 util目录的 Scanner类
+    import java.util.Scanner;    // java安装目录/jdk-11.0.14.jdk/lib/src/java.base/java/util/Scanner.java
+
+    public class VarTest {
+
+        public static void main (String[] args) {
+
+            // 1.声明两个变量用于记录姓名和年龄信息
+            String name;
+            int age;
+
+            // 2.提示用户从键盘输入 姓名和年龄信息 并放入到变量中
+            System.out.println("请输入您的姓名和年龄信息");
+            // 创建一个扫描器 来扫描键盘输入的内容  System.in代表键盘输入
+            Scanner sc = new Scanner(System.in);
+            // 通过扫描器读取一个字符串数据 放入变量name中
+            name = sc.next();
+            // 通过扫描器读取一个整数数据 放入变量age中
+            age = sc.nextInt();
+
+            // 3.打印变量的数值
+            System.out.println("name = " + name);
+            System.out.println("age = " + age);
+        }
+    }
+    ```
+    - 执行代码
+        ```
+        javac VarTest.java
+        java VarTest
+        ```
+    - 输入时有两种方式
+        - 1.名字和年龄一起输入, 中间空格隔开，然后敲回车
+            ```
+            youName 18
+            ```
+        - 2.每输完一个 敲回车
+    ```
+    <<< java VarTest
+    >>> 请输入您的姓名和年龄信息
+    <<< mimi 19
+    >>> name = mimi
+    >>> age = 19
+    ```
+
+## 第5讲 变量输入输出案例的优化和手册介绍
+- 由于之前代码的写法 存在一定的优化空间
+    - 主要的问题是，变量 先声明 后才使用
+    > 占着茅坑，不拉屎
+    
+    - 用到变量的时候 再声明
+        - 不再提前声明，因为提前声明有一定的 性能浪费
+    - 开发编码规范
+        > 变量 随使用 随声明
+
+```java
+/*
+    编程实现 变量的输入输出
+*/
+
+// 导入java目录中的 util目录的 Scanner类
+import java.util.Scanner;    // java安装目录/jdk-11.0.14.jdk/lib/src/java.base/java/util/Scanner.java
+
+public class VarTest {
+
+    public static void main (String[] args) {
+
+        // String name;
+        // int age;
+
+        System.out.println("请输入您的姓名和年龄信息");
+        Scanner sc = new Scanner(System.in);
+
+        String name = sc.next(); // 用到时 再声明
+        int age = sc.nextInt();
+
+        System.out.println("name = " + name);
+        System.out.println("age = " + age);
+    }
+}
+```
+
+- ### 官方库的使用
+    - JDK中带有大量的API类，是有Java系统带来的工具库，这些工具数以万计! 是Java官方程序员的技术积累。
+    - 使用这些类可以大大简化编程，提高开发效率。
+    - 具体的API类功能，可以参阅Java的参考手册
+
+
+## 第6讲 数据类型的分类
+- 在Java语言中数据类型主要分为两大类:
+- (1) 8个 基本数据类型 (记住)
+    ```
+    byte、short、 int、 long、 float、 double、 boolean、 char
+    ```
+- (2)引用数据类型(了解)
+    ```
+    数组、类、接口、枚举、标注
+    ```
+
+> **`String 类型`** 属于 **`引用数据类型`**, 中的 "类" 类型
+
+
+## 第7讲 常用的进制
+- 在日常生活中采用十进制进行数据的描述,逢十进一
+    - 十进制权重是: `10^0、 10^1、 10^2、...`
+- 在计算机的底层采用0和1组成的二进制序列进行数据的描述，逢二进一
+    - 二进制的权重是: `2^0、2^1、2^2、`
+- 二进制中的最高位(最左边) 用于代表符号位
+    - 若该位是0 则表示 非负数
+    - 若该位是1 则表示负数
+- 八进制 和 十六进制 其实都是 `二进制的简写`。
+    - 让 二进制 看起来跟直观, 否则二进制的大数 会特别特别的长, 难以阅读
+
+## 第8讲 进制之间的转换
+- 正十进制转换为二进制的方式
+    - ### 除2取余法
+        - 方法一：**`除2取余法`**, 使用十进制整数 不断地除以2 取出余数, 直到商为0时 将余数逆序排序。
+            - 想转换成 几进制, 就 除以几
+        - ![](img/java/4.jpg)
+        - 最终得到结果: `111 1011`
+        > 进制转换 在线工具 https://www.sojson.com/hexconvert.html
+    - 进制的表示方法
+        - 像上面 `111 1011` 这样一个数，如果单纯的放在这里
+            - 我们也可以将其 理解为 十进制
+            - 也可以理解为 二进制
+            > 这就导致了 新的问题，当我们看到一个数时，我们没法确定 它到底是 多少进制？
+        - 解决方案
+            - Java 7 提出一个新特性
+                - 表示 二进制, 我们可以在其前面 添加一个 **`0b`**, 如 `0b111 1011`
+                    - 其中 `b` 代表 `binary` 二进制的意思
+                    - 或者 大写的 `B` 也可以, `0B111 1011`
+                - 八进制, `0` 开头就是 八进制
+                - 十六进制, `0x` 开头就是 十六进制
+    - 微软计算器 转换进制
+        - windows 系统 -> 打开计算器 -> 左上角菜单-查看 -> 切换到程序员版
+        - 输入45，然后转换成 二进制, 得到 `10 1101`
+        - ![](img/java/5.jpg)
+        - > 在 64位 系统中, 真正的 二进制 前面是带很多 0 的，总共 64位数
+        - ![](img/java/6.jpg)
+        - 在 真正的 64位 二进制的数据中, 最左边那位
+            - 二进制中的最高位(最左边) 用于代表符号位
+                - 若该位是0 则表示 非负数
+                - 若该位是1 则表示负数
+
+    - ### 拆分法
+        - 方法二：**`拆分法`**, 将 十进制整数 拆分为 若干个二进制 **`权重`** 的和，有该权重下面写1，否则写0.
+            - ![](img/java/7.jpg)
+            - 二进制的权重是: `2^0、2^1、2^2、2^3、2^4、2^5、...`
+                - 转换成十进制就是: `1、2、4、8、16、32、64、128、...`
+            - 下面以 十进制 `45` 转换为二进制 为例子：
+                - 先找到 二进制权重中 刚好比 `45` 小的数：为 `32`
+                - 然后再依次 找到 二进制权重中 更小一点的数：`8、4、1`
+                - 所以 十进制 `45` 可以拆分为 `32 + 8 + 4 + 1` 的和
+                - 规则：有该权重下面写1，否则写0.
+                    - 则得到 二进制: `0010 1101`
