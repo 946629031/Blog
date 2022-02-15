@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-09 15:14:55
- * @LastEditTime: 2022-02-14 15:37:03
+ * @LastEditTime: 2022-02-15 15:39:36
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /Blog/JAVA入门.md
@@ -747,7 +747,7 @@ public class IntTest {
     System.out.println("i1 = " + i1);
     ```
 
-## 整数类型的笔试考点
+## 第12讲 整数类型的笔试考点
 - 1.为什么变量命名 不能使用 数字开头?
     - 举个反例: `2502505000L` 它表示 `long类型` 的 `字面量`
     - 有人说，我可以命名一个 数字开头，以 `M` 结尾的 变量名 (这种方式 虽然可以)
@@ -772,3 +772,102 @@ public class IntTest {
         - 当 Java 遇到这种 无法确定的情况时，就会直接报错
     - 答案:
         - `error: incompatible types: possible lossy conversion from int to byte`
+
+
+## 第13讲 浮点类型
+- Java语言中用于描述 **`小数`** 数据的类型: **`float`** 和 **`double`**, **`推荐 double类型`**
+- ### <b style='color:red'>float类型</b> 在内存空间 `占4个字节`, 叫做 `单精度浮点数`, 可以表示 **`7位有效数字`**, 范围: `-3.403E38~3.403E38`
+    - int类型 也是 `占4个字节`
+        - 但是 int类型 表示范围 只有: `-2^31 ~ 2^31-1`
+    - 如果想表示 float类型，需要在数字末尾加 `F` 或者 `f`，例如 3.14f, 3.14F
+    - `3.403E38` 什么意思?
+        - `10^38`, 10 的 38 次方 叫做 `E38`
+    - 为什么同样是 `占4个字节`, float类型 比 int类型 能表示的范围更大?
+        - 实际上 是跟它底层 二进制 结构有关系
+        - int类型: 都是一个 符号位, 剩下的都是 整数
+        - float类型: 除了一个 符号位, 还有一个 专门表示 `次方` 的 (指数部分的)，剩下的才是 表示小数部分的位数
+        - 因为 float类型 有表示 `次方` 的部分, 所以 float类型 能表示的范围更大
+- ### <b style='color:red'>double类型</b> 在内存空间 `占8个字节`, 叫做 `双精度浮点数`, 可以表示 **`15位有效数字`**, 范围: `-1.798E308~ 1.798E308`
+    - long类型 也是 `占8个字节`
+    - 为什么更推荐 `double类型` ?
+        - 因为它可以表示到 **`15位有效数字`**，能够更加准确的 表示数据
+        - 但是也更多消耗 4个字节 内存空间
+- Java程序中直接写出的小数数据叫做 `直接量`, 默认为 double类型, 若希
+望表达float类型的直接量，则需要在直接量的后面加上f或者F.
+> [Java 浮点类型 float 和 double 的主要区别](https://www.runoob.com/w3cnote/java-the-different-float-double.html)
+
+
+- ### 浮点类型的使用
+    ```java
+    public class DoubleTest {
+
+        public static void main (String[] args) {
+
+            // 1.声明一个 float类型 的变量并初始化
+            float f1 = 3.1415926;   // error: incompatible types: possible lossy conversion from double to float
+            // 2.打印变量的数值
+            System.out.println("f1 = " + f1);
+        }
+    }
+    ```
+    - 在Java中, 小数直接量(字面量) **`默认为 double类型`**
+    - 上面报错: `错误：不兼容的类型: 从double 转换到 float 可能会有损失`
+        - 因为默认为 double类型, 而 double类型 占8个字符, float类型 占4个字符
+        - 不论容量大小、位数上的考虑、精度上的考虑, double类型 转到 float类型 都会有可能溢出。因为不确定，所以干脆就直接报错了
+    ```java
+    public class DoubleTest {
+
+        public static void main (String[] args) {
+
+            // 1.声明一个 float类型 的变量并初始化
+            // float f1 = 3.1415926;   // error: incompatible types: possible lossy conversion from double to float
+            float f1 = 3.1415926F;
+            // 2.打印变量的数值
+            System.out.println("f1 = " + f1);
+        }
+    }
+    ```
+    ```
+    <<< java DoubleTest
+    >>> f1 = 3.1415925
+    ```
+    - 这里出现了 另一个问题:
+        - 我明明赋值的是  `3.1415926F`
+        - 为啥打印出来的是 `3.1415925` ?
+        - 为什么会这样?
+            - 因为 float类型 默认只能保证 **`7位有效数字`**
+            - 在上面的例子中 7位有效数字 只到 `3.141592`，剩下的就不能保证 有效了
+            - 一般是7位数有效，这里是跟 `编译器` 有关系
+    ```java
+    public class DoubleTest {
+
+        public static void main (String[] args) {
+
+            // 1.声明一个 float类型 的变量并初始化
+            // float f1 = 3.1415926;   // error: incompatible types: possible lossy conversion from double to float
+            float f1 = 3.1415926F;
+            // 2.打印变量的数值
+            System.out.println("f1 = " + f1); // d1 = 3.1415925
+
+            double d1 = 3.1415926;
+            System.out.println("d1 = " + d1); // d1 = 3.1415926
+        }
+    }
+    ```
+    - double类型 一般可以表示 **`15位有效数字`**
+    > 由上面的例子可以看出, `double类型` 比 `float类型` 所表示的 `有效位数` 更多 <br> <br>
+    > 还有为什么 Java 默认 小数数据的 数据类型是 `double类型` 了吧？
+
+- ### 浮点类型的 误差
+    ```java
+    public class DoubleTest {
+
+        public static void main (String[] args) {
+
+            System.out.println(0.1 + 0.2); // 0.30000000000000004
+        }
+    }
+    ```
+    - `double类型` 和 `float类型` 在运算时 都可能`存在误差`
+        - 所以以后在 商业开发时，涉及到金钱、货币的开发时，都不使用 `double类型` 和 `float类型`
+        - > 若希望实现 **`精确运算`** 则借助 `java.math.BigDecimal` 类型
