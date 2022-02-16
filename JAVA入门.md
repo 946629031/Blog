@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-09 15:14:55
- * @LastEditTime: 2022-02-15 15:39:36
+ * @LastEditTime: 2022-02-16 10:22:14
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /Blog/JAVA入门.md
@@ -871,3 +871,102 @@ public class IntTest {
     - `double类型` 和 `float类型` 在运算时 都可能`存在误差`
         - 所以以后在 商业开发时，涉及到金钱、货币的开发时，都不使用 `double类型` 和 `float类型`
         - > 若希望实现 **`精确运算`** 则借助 `java.math.BigDecimal` 类型
+
+
+## 第14讲 布尔类型
+- Java语言中用于描述真假信息类型有: `boolean`, 数值只有: `true` 和 `false`
+    - 数值只有: `true` 和 `false`，没有 `1` 或 `0`
+- 布尔类型在内存空间中所占大小 Java官方没有明确的规定，可以认为是 1个字节
+```java
+public class BooleanTest {
+
+    public static void main (String[] args) {
+
+       // 1.声明一个boolean类型的变量并初始化
+        boolean b1 = true;
+
+        // 2.打印变量的数值
+        System. out .println("b1 = " + b1); // b1 = true
+
+        // 3.修改变量b1的数值 = 赋值运算符，用于将=右边的数据赋值给=左边的变量，覆盖变量中原来的数值
+        b1 = false;
+        System. out .println("b1 = " + b1); // b1 = false
+
+        bl = 1; // 错误: 不兼容的类型: int 无法转换为 boolean
+    }
+}
+```
+## 第14讲 字符类型
+- Java语言中用于描述 `单个字符` 的数据类型: **`char类型`**。如: `'a'、'中'` 等。
+- 其中char类型在内存空间中占 `2个字节` 并且没有符号位, 表示的范围是: `0 ~ 65535`
+    - 由于现实生活中很少有数据能够被单个字符描述, 因此以后的开发中更多的使用由多个字符串起来组成的 字符串, 使用 `String类型` 加以描述, 如: `"hello"、"奇点”` 等。
+- **`char类型`** 使用 `单引号` 引起来, 如: `'a'、'中'`
+- **`String类型`** 使用 `双引号` 引起来, 如: `"hello"、"奇点”`
+
+- 计算机的底层只识别 `0`和`1` 组成的二进制序列, 对于字符 'a' 这样的图案来说不满足该规则, 因此该数据无法直接在计算机中存储, 但现实生活中存在这样的 `图案数据` 需要计算机存储, 为了使得该数据能够存储起来就可以给该数据指定一个 `编号`, 然后 `将编号存储起来即可`, 该编号就叫做 `ASCII` 。
+    - 计算机底层 在存储 字符类型 时，对应存的是 `ASCII` 的整数编号. 
+        - 如 在存储 'a' 这个字符时，对应存储的是 `97` 这个整数编号
+
+```java
+/**
+ * 编程实现字符类型的使用
+ */
+public class CharTest {
+
+    public static void main (String[] args) {
+
+        // 1.声明一个char类型的变量 并初始化
+        char c1 = 'a'; // char类型 使用 单引号 引起来
+
+        // 2.打印变量的数值
+        System.out.println("c1 = " + c1);   // c1 = a  // 打印图案类型 (字符类型)
+        System.out.println("对应的编号是:" + (int)c1 );  // 表示将 char类型 的c1 强制转换为 inta类型 并打印   97
+
+
+        // 1.声明一个char类型的变量 并初始化
+        char c2 = 98;       // 给char类型 赋值一个 ASCII 整数
+
+        // 2.打印变量的数值
+        System.out.println("c2 = " + c2);   // c2 = b
+        System.out.println("对应的编号是:" + (int)c2 );  // 98
+    }
+}
+```
+- ASCII码表
+    - ![](img/java/ascii.jpeg)
+    - 要求掌握的ASCII有: 
+        - 'A' - 65
+        - 'a' - 97
+        - '0' - 48
+        - 空格 - 32
+        - 换行符 - 10
+
+- ## Unicode字符集
+- 从上一节 ASCII码表 我们可以看到，ASCII码表 里面只有 英文字母, 没有其它语言的 任何文字
+    - 因此 ASCII码表 也称之为 `美国标准信息交换代码`, 它只能满足 美国人的使用需求
+    - 那么 其它语言 怎么办呢？
+- **`Unicode`** 是 世界通用的定长字符集，所有的字符都是 **`16位`**
+    - Unicode 为什么是 世界通用 的字符集?
+        - 因为它把 全世界所有主要语言 都指定了编号
+        - Unicode 包含 ASCII码
+    - Java字符类型 采用 Unicode字符集编码
+- 在网上搜索 中文 与 Unicode 互相转换的工具
+    - 例如, [站长工具 unicode](https://tool.chinaz.com/tools/unicode.aspx)
+    - 转换案例:
+        - `'奇点'` 转换成unicode得到 `\u5947\u70b9`
+            - 其中 `\u` 开头表示是 unicode 编码
+```java
+public class CharTest {
+
+    public static void main (String[] args) {
+
+        char c3 = '\u5947';     // 给 char类型 赋值 unicode编码
+        char c4 = '\u70b9';
+        System.out.println("最终的结果是: " + c3 + c4);   // 奇点
+    }
+}
+```
+- 由上面的代码 可以验证到: `Java字符类型 采用 Unicode字符集编码` 的
+
+
+25.转义字符的概念和使用
