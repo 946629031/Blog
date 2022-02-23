@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2022-02-09 15:14:55
- * @LastEditTime: 2022-02-16 10:22:14
+ * @LastEditTime: 2022-02-23 10:49:12
  * @LastEditors: Please set LastEditors
  * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  * @FilePath: /Blog/JAVA入门.md
@@ -969,4 +969,105 @@ public class CharTest {
 - 由上面的代码 可以验证到: `Java字符类型 采用 Unicode字符集编码` 的
 
 
-25.转义字符的概念和使用
+- ## 转义字符的概念和使用
+    > `转义`: 就是转换原有的含义, 在特殊字符前加 **`\`** 斜杠实现
+    - 双引号本身 在Java中的含义
+        - 1.字符串的开头和结尾标准
+        - 2.双引号自身
+    ```java
+    System.out.println("我想过过"过过过过的生活！"); // 当不加 转义字符时，代码会报错
+    ```
+    ```java
+    System.out.println("我想过过\"过过过过的生活！");
+    System.out.println("我想过过\'过过过过的生活！");
+    System.out.println("我想过过\\过过过过的生活！");
+    System.out.println("我想过过\t过过过过的生活！");   // \t 是制表符, 相当于按一下 tab 键盘
+    System.out.println("我想过过\n过过过过的生活！");   // \n 是换行符
+    ```
+- ## 基本数据类型之间的转换
+    - Java语言中 基本数据类型之间的转换方式: **`自动类型转换`** 和 **`强制类型转换`**
+    - ### **`自动类型转换`** 主要指从 **`小类型`** 到 **`大类型`** 之间的转换
+        - ![](img/java/13.jpg)
+        - ![](img/java/14.jpg)
+    ```java
+    /**
+    * 编程实现 基本数据类型之间转换 的使用
+    */
+    public class DoubleTest {
+
+        public static void main (String[] args) {
+
+            // 1.声明两个变量 并初始化
+            byte b1 = 10;
+            short s1 = 20;
+
+            // 2.打印变量的数值
+            System.out.println("b1 = " + b1); // b1 = 10
+            System.out.println("s1 = " + s1); // s1 = 20
+
+            // 3.实现自动类型转换的使用
+            s1 = b1;    // 表示将 变量b1 的数值赋值给 变量s1, 并覆盖 变量s1 中原来的数值, 相当于 从byte类型 到 short类型 的转换, 小到大 自动转换
+            System.out.println("b1 = " + b1); // b1 = 10
+            System.out.println("s1 = " + s1); // s1 = 10
+        }
+    }
+    ```
+    - ### **`强制类型转换`** 主要指 **`大类型`** 到 **`小类型`** 之间的转换, 语法格式如下:
+        ```
+        目标类型 变量名 = (目标类型)源类型变量名;
+
+        byte b1 = (byte)s1;
+        ```
+        ```java
+        /**
+        * 编程实现 基本数据类型之间转换 的使用
+        */
+        public class DoubleTest {
+
+            public static void main (String[] args) {
+
+                // 1.声明两个变量 并初始化
+                byte b1 = 10;
+                short s1 = 20;
+
+                // 4.实现强制类型转换的使用
+
+                // 表示将变量s1的数值 赋值给 变量b1, 并覆盖 变量b1 中原来的数值, 相当于从 short类型 到 byte类型 的转换, 大到小 强制转换
+                b1 = s1;    // 错误: 不兼容的类型: 从 short 转换到 byte 可能会有损失
+
+                s1 = 128;   // 故意加该行代码   128: 0000 0000 1000 0000 => 1000 0000 => 0111 1111 => 1000 0000 => 128 => -128
+                b1 = (byte)s1;  // 强制类型转换
+                System.out.println("b1 = " + b1); // b1 = 10    -128  // 强行 大转小 损失太大, 直接变成 负128了
+                System.out.println("s1 = " + s1); // s1 = 10    128
+            }
+        }
+        ```
+        - short类型 `128` 强转 byte类型
+            -  short类型 在内存空间 占2个字节, 2*8 = 16位 二进制 => `0000 0000 1000 0000 `
+            - 强行转换成 byte类型, byte类型 占1个字节, 8位 二进制, 且Java中 默认取 `低8位`=> `1000 0000`
+            - byte类型 中 最高位是 `符号位`, `1` 代表负数, 所以 `1000 0000` 是个负数
+            - 而上面的代码中, `System.out.println` 是要打印 10进制 数据, 所以这里出现了一个 `负数二进制 转 十进制` 的问题
+                - `负二进制 转 十进制` 要先减1 => `0111 1111`
+                - `按位取反` => `1000 0000`
+                - `转换成十进制整数` => `128`
+                - `添加负号` => `-128`
+
+        - **`强制类型转换`** 主要指 **`大类型`** 到 **`小类型`** 之间的转换, 有两种情况
+            - 1.放得下 的情况: 不会损失
+                ```java
+                byte b1 = 10;
+                short s1 = 10;
+
+                b1 = (byte)s1;  // 强制类型转换
+                System.out.println("b1 = " + b1);   // b1 = 10
+                System.out.println("s1 = " + s1);   // s1 = 10
+                ```
+            - 2.放不下 的情况: 会有损失
+                ```java
+                byte b1 = 10;
+                short s1 = 128;
+
+                b1 = (byte)s1;  // 强制类型转换
+                System.out.println("b1 = " + b1); // b1 = 10    -128  // 强行 大转小 损失太大, 直接变成 负128了
+                System.out.println("s1 = " + s1); // s1 = 10    128
+                ```
