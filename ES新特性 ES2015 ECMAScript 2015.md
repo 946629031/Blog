@@ -2,12 +2,15 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-01 10:43:12
+ * @LastEditTime: 2022-12-01 15:15:49
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 
 - 目录
+    - []()
+    - []()
+    - [for...of 循环](#for...of-循环)
     - [ES2015 实现可迭代接口](#ES2015-实现可迭代接口)
     - [迭代器模式](#迭代器模式)
     - [生成器 Generator](#生成器-Generator)
@@ -18,7 +21,83 @@
     - []()
     - []()
 
-    
+
+
+- ## for...of 循环
+    - 在 ECMAScript 中，遍历数据有很多种方法
+        - `for`循环，比较适合遍历 普通数组
+        - `for...in`循环, 比较适合遍历 键值对
+        - 一些函数式的遍历方法
+            - Array.forEach
+            - Array.map
+            - ...等
+    - 但是，这些遍历方式 都有一定的局限性
+    - 所以 ES2015 它借鉴了很多其它的语言, `引入了全新的 for...of 循环`, 计划在以后的 ES 标准中 **`for...of 循环 将作为所有数据结构的统一方式`**
+        - 换句话说，只要你明白 for...of 内部的工作原理，你就能使用它 去遍历任何数据
+    - for...of 的基本使用
+        ```js
+        const arr = [111, 222, 333, 444]
+
+        for (const item of arr) { // for...of 循环 拿到的是 item 本身，而不是 index
+            console.log(item)
+        }
+
+        // 111
+        // 222
+        // 333
+        // 444
+        ```
+        - for...of 循环能够使用 `break` 终止循环, 而 `Array.forEach` 是不能终止循环的
+            - 以前我们为了能终止循环，会去使用
+                - `Array.some()` 返回 true 可终止循环
+                - `Array.every()` 返回 false 可终止循环
+    - 遍历 Map 对象
+        ```js
+        const m = new Map()
+        m.set('foo', '123')
+        m.set('bar', '345')
+
+        for ( const item of m ) { // 遍历 Map对象时，item 返回的是 键值对
+            console.log(item)
+        }
+
+        // [ 'foo', '123' ]
+        // [ 'bar', '345' ]
+        ```
+        - 使用数组的解构语法
+        ```js
+        const m = new Map()
+        m.set('foo', '123')
+        m.set('bar', '345')
+
+        for ( const [key, value] of m ) { // 使用数组的解构语法
+            console.log(key, value)
+        }
+
+        // 'foo' '123'
+        // 'bar' '345'
+        ```
+    - 尝试遍历 普通对象
+        ```js
+        const obj = { foo: 123, bar: 456 }
+
+        for ( const item of obj ) {
+            console.log(item)
+        }
+
+        // Uncaught TypeError: obj is not iterable
+        ```
+        - 这时候会发现 代码自己报错了 `Uncaught TypeError: obj is not iterable`
+        - 意思是说 obj 是不可被迭代的
+    - 而我们开始 说的是 `for...of 是可以遍历所有数据结构的`
+        - 但是这里实验发现，它连最基本的普通对象 `object` 都不能遍历
+        - 那这究竟是为什么呢？
+        - 这要看下一节: 实现可迭代接口
+            - > `只要实现了 可迭代接口 的对象，都能被 for...of 遍历`
+
+
+
+
 - ## ES2015 实现可迭代接口
     - ### 结论:
         ```js
