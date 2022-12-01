@@ -2,17 +2,30 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-11-30 14:02:42
+ * @LastEditTime: 2022-12-01 10:43:12
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
+
+- 目录
+    - [ES2015 实现可迭代接口](#ES2015-实现可迭代接口)
+    - [迭代器模式](#迭代器模式)
+    - [生成器 Generator](#生成器-Generator)
+    - [生成器的应用](#生成器的应用)
+    - []()
+    - []()
+    - []()
+    - []()
+    - []()
+
+    
 - ## ES2015 实现可迭代接口
     - ### 结论:
         ```js
-        const obj = {
+        const obj = {                        // Iterable
             store: ['foo', 'bar', 'baz'],
 
-            [Symbol.iterator]: function () {
+            [Symbol.iterator]: function () { // Iterator: Symbol.iterator 是一个常量，所以要放在 计算属性名 的方式
                 let index = 0
                 const self = this
                 
@@ -105,10 +118,10 @@
         - B 的任务是 要把所有数据 循环出来，并罗列到界面上
         ```js
         // A的代码 ###################################
-        const todos = [
+        const todos = {
             life: ['吃饭', '睡觉', '学习'],
             learn: ['语文', '数学', '外语']
-        ]
+        }
 
 
         // B的代码 ###################################
@@ -149,7 +162,7 @@
 
             ```js
             // A的代码 ###################################
-            const todos = [
+            const todos = {
                 life: ['吃饭', '睡觉', '学习'],
                 learn: ['语文', '数学', '外语'],
                 work: ['喝茶'],
@@ -160,7 +173,7 @@
                         callback(item)
                     }
                 }
-            ]
+            }
 
 
             // B的代码 ###################################
@@ -182,7 +195,7 @@
         - #### 使用迭代器 的方式来实现这个 遍历接口
             ```js
             // A的代码 ###################################
-            const todos = [
+            const todos = {
                 life: ['吃饭', '睡觉', '学习'],
                 learn: ['语文', '数学', '外语'],
                 work: ['喝茶'],
@@ -207,7 +220,7 @@
                         }
                     }
                 }
-            ]
+            }
 
 
             // B的代码 ###################################
@@ -233,3 +246,75 @@
         - 总结
             - 上面的 each 方法，只适用于 当前这个对象结构
             - 而 `ES2015 中的迭代器，它是 语言层面实现的` 迭代器模式。所以它可以适用于 任何数据结构，只需要你通过代码去实现 Iterator 方法
+
+
+
+
+- ## 生成器 Generator
+    - 生成器 Generator 有什么作用？
+        - > 避免异步编程过程中 回调嵌套过深 <br> 提供更好的 异步编程解决方案
+    ```js
+    function * foo () {
+        console.log('zce')
+        return 100
+    }
+
+    const res = foo()
+    console.log(result.next())
+    ```
+    - ![](./img/es2015/1.generator-0.jpg)
+
+    - 执行 `res.next()`
+        - 执行了 函数体代码
+        - 然后 函数的返回值 放在了 value 的值中 `{value: 100, done: true}`
+    - `生成器对象` 也实现了 `Iterator 接口`
+    - 但是，到这里 如果只是这样去使用的话，根本看不出 生成器函数的作用
+        - 因为生成器函数 在使用的时候，一定会配合一个关键字 `yield` 去使用
+        - `yield` 关键词 和 `return` 非常类似 又有很大的不同
+            -  `yield` 关键词
+                - ![](./img/es2015/1.generator-3.jpg)
+            - `return` 关键词
+                - ![](./img/es2015/1.generator-4.jpg)
+    - ### 执行了 生成器函数后，返回的是 `生成器对象 Generator`
+        - 生成器对象 有两个状态
+        - 暂停态 suspended
+            - ![](./img/es2015/1.generator-1.jpg)
+        - 结束态 closed
+            - ![](./img/es2015/1.generator-2.jpg)
+
+- ## 生成器的应用
+    - 案例1: 发号器 / 生成 ID 且永远不重复
+        ```js
+        function * createIdMaker () {
+            let id = 1
+            while (true) {
+                yield id++
+            }
+        }
+
+        const idMaker = createIdMaker()
+
+        console.log( idMaker.next().value ) // 1
+        console.log( idMaker.next().value ) // 2
+        console.log( idMaker.next().value ) // 3
+        console.log( idMaker.next().value ) // 4
+        ```
+    - 案例2: 使用 Generator 函数实现 iterator 方法
+        - 使用生成器 实现对象的 iterator方法
+        ```js
+        const todos = {
+            life: ['吃饭', '睡觉', '打豆豆'],
+            learn: ['语文', '数学', '外语'],
+            work: ['喝茶'],
+            [Symbol.iterator]: function * () {
+                const all = [ ...this.life, ...this.learn, ...this.work ]
+                for (const item of all) {
+                    yield item
+                }
+            }
+        }
+
+        for (const item of todos) {
+            console.log(item)
+        }
+        ```
