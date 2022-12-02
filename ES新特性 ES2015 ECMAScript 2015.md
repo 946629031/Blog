@@ -2,7 +2,7 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-01 15:15:49
+ * @LastEditTime: 2022-12-02 11:49:42
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -11,6 +11,7 @@
     - []()
     - []()
     - [for...of 循环](#for...of-循环)
+    - [可迭代接口 Iterable](#可迭代接口-Iterable)
     - [ES2015 实现可迭代接口](#ES2015-实现可迭代接口)
     - [迭代器模式](#迭代器模式)
     - [生成器 Generator](#生成器-Generator)
@@ -92,11 +93,39 @@
     - 而我们开始 说的是 `for...of 是可以遍历所有数据结构的`
         - 但是这里实验发现，它连最基本的普通对象 `object` 都不能遍历
         - 那这究竟是为什么呢？
-        - 这要看下一节: 实现可迭代接口
+        - 这要看下一节: 可迭代接口
             - > `只要实现了 可迭代接口 的对象，都能被 for...of 遍历`
 
 
 
+
+- ## 可迭代接口 Iterable
+    - ES 中能够表示有结构的数据类型越来越多
+        - 从最早的 Array, Object
+        - 到现在的 Set, Map
+        - 开发者还可以通过 组合使用 这些类型，来定制符合自己业务需求的 数据结构
+    - **`为了给各种各样的 数据结构提供统一遍历方式, ES2015 提供了 Iterable 接口`**
+        - 意思是可迭代的
+        - 如果你不理解编程中 `接口` 的概念，你可以将其理解为一种 `规格标准`
+            - 例如 我们在 ECMAScript 中，任意一种数据类型都有 `toString()` 方法，这是因为它们都实现了 `统一的规格标准`
+                - 而在编程中，更专业的说法是，`它们都实现了 统一的接口`
+    - **`实现 Iterable 可迭代接口，就是可以被 for...of 遍历的前提`**
+    - 观察实验
+        - 已知 `[], new Set(), new Map()` 都能被 `for...of` 循环遍历
+        - 我们打开 Chrome 开发者工具, 分别输入 `[], new Set(), new Map()`, 然后 观察它们都有什么共同点
+        - ![](./img/es2015/0.iterable-0.jpg)
+        - 在它们的 Prototype 原型上
+        - 我们发现 都有一个 `Symbol(Symbol.iterator): ƒ values()`
+            - 它的值 是一个函数
+        -  **观察可得，`Iterable接口中，约定的是 对象中需要去 挂载 iterator() 方法`**
+    - 那么这个 `iterator()` 方法有什么作用呢？ 下面我们再来实验一下
+        - ![](./img/es2015/0.iterable-1.jpg)
+        - 在这个 迭代器对象 内部，应该是维护了一个 `数据指针`
+        - 我们每调用一次 `next()`, 指针 就会往后移动一位
+        - 然后返回 `迭代结果 iterationResult`: `{value: 11, done: false}`
+            - `value` 是当前迭代结果值
+            - `done` 表示是否迭代结束
+        - 其实 这就是 `for...of` 循环的工作原理
 
 - ## ES2015 实现可迭代接口
     - ### 结论:
