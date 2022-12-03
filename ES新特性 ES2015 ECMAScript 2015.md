@@ -2,7 +2,7 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-03 11:37:59
+ * @LastEditTime: 2022-12-03 15:06:46
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,6 +10,7 @@
 - 目录
     - []()
     - [Set 数据结构](#Set-数据结构)
+    - [Map 数据结构](#Map-数据结构)
     - [for...of 循环](#for...of-循环)
     - [可迭代接口 Iterable](#可迭代接口-Iterable)
     - [ES2015 实现可迭代接口](#ES2015-实现可迭代接口)
@@ -76,6 +77,64 @@
         const res2 = [ ...new Set(arr) ] // 方式二
         ```
 
+- ## Map 数据结构
+    - ES2015 还新增了一种数据结构: Map
+        - Map 数据结构，与 对象Object 的数据结构非常类似
+
+    - 那么为什么要新增 Map 对象? 原来的 Object 数据结构 有什么问题吗？
+        - Object 存放一些复杂结构的数据时，会有一些问题
+        ```js
+        const obj = {}
+        obj[true] = 'value'
+        obj[123] = 'value'
+        obj[{ a: 1 }] = 'value'
+
+        console.log( Object.keys(obj) ) // [ '123', 'true', '[object Object]' ]
+        ```
+        - 通过上面的实验 我们发现
+            - 如果 key 值传入的 不是 string 类型，那么他会默认进行 `把传入值.toString()` 的结果作为 key 的值
+            - 所以上面, `true, 123, { a: 1}` 都变成了 `'123', 'true', '[object Object]'`
+        - 那么，如果是这样
+            - 如果我们把 `学生对象` 作为 `键`, 来存储 学生成绩
+                - 这样的话 会没法区分
+            ```js
+            const obj = {}
+            obj[{ name: 'studentA' }] = '123'
+            obj[{ name: 'studentB' }] = '100'
+
+            console.log( Object.keys(obj) ) // ['[object Object]']
+            console.log( obj ) // {[object Object]: '100'}  // 虽然希望往数组里面存两组值，但是最终的结果 是只存了最后一组，因为前面的都被覆盖掉了
+
+            console.log( obj['[object Object]'] ) // 100  // 如果这样取值，取出的值 不一定是预期的值
+            ```
+    - 那么 ES2015 的 Map 结构，就是用来解决这种问题的
+        - Map 才能算是 真正意义上 `键值对集合`, 用来`映射两个 任意类型数据 之间的关系`
+        - > Map 能够用任意类型数据 作为键, 而 Object 只能用字符串 作为键
+        ```js
+        const m = new Map()
+
+        const tom = { name: 'tom' }
+
+        m.set(tom, 90)
+
+        console.log(m) // Map { { name: 'tom' } => 90 }
+
+        m.get(tom) // 90  // 获取属性的值
+        ```
+    - 常用api
+        - [MDN Map](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Map)
+        ```js
+        Map.prototype.size
+        Map.prototype.clear()
+        Map.prototype.delete()
+        Map.prototype.entries()
+        Map.prototype.forEach()
+        Map.prototype.get()
+        Map.prototype.has()
+        Map.prototype.keys()
+        Map.prototype.set()
+        Map.prototype.values()
+        ```
 - ## for...of 循环
     - 在 ECMAScript 中，遍历数据有很多种方法
         - `for`循环，比较适合遍历 普通数组
