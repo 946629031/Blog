@@ -2,14 +2,14 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-02 11:49:42
+ * @LastEditTime: 2022-12-03 11:37:59
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 
 - 目录
     - []()
-    - []()
+    - [Set 数据结构](#Set-数据结构)
     - [for...of 循环](#for...of-循环)
     - [可迭代接口 Iterable](#可迭代接口-Iterable)
     - [ES2015 实现可迭代接口](#ES2015-实现可迭代接口)
@@ -23,6 +23,58 @@
     - []()
 
 
+- ## Set 数据结构
+    - ES2015 中提供了一个叫做 `Set` 的全新`数据结构`
+        - 你可以把它理解为 `集合`
+        - 他与传统的 `数组 Array` 非常类似
+        - 但是 `Set 内部的成员 是不允许重复的`
+            - 每一个值 在同一个 Set 中，都是唯一的
+    - 基本用法
+        ```js
+        const s = new Set()
+
+        s.add(1).add(2).add(3).add(4).add(2) // 由于 add() 方法可以返回 对象本身，所以可以链式调用
+
+        // 如果添加了重复的值，那么添加的重复值 将被忽略掉
+
+        console.log(s) // Set { 1, 2, 3, 4 }
+
+
+        // 遍历 Set 集合对象
+
+        s.forEach(item => console.log(item))
+
+        for (const item of s) {
+            
+        }
+        ```
+    - Set 其它 api
+        - [MDN Set 文档](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Set)
+        ```js
+        Set.prototype.size // 求 length
+        Set.prototype.add()
+        Set.prototype.clear() // 清楚所有值
+        Set.prototype.delete() // 删除指定 值，return true/false
+        Set.prototype.entries()
+        Set.prototype.forEach()
+        Set.prototype.has() // 是否包含 某个值
+        Set.prototype.keys()
+        Set.prototype.values()
+        ```
+    - Set 最常见的应用场景: 为数组去重
+        ```js
+        const arr = [1, 2, 1, 3, 4, 1]
+
+        const result = new Set(arr)
+
+        console.log(result) // Set { 1, 2, 3, 4 }
+
+        // 把 Set对象 转化为 Array数组
+        
+        const res1 = Array.from(new Set(arr)) // 方式一
+        
+        const res2 = [ ...new Set(arr) ] // 方式二
+        ```
 
 - ## for...of 循环
     - 在 ECMAScript 中，遍历数据有很多种方法
@@ -33,6 +85,7 @@
             - Array.map
             - ...等
     - 但是，这些遍历方式 都有一定的局限性
+    - > ES2015 提供的新语法 for...of 循环
     - 所以 ES2015 它借鉴了很多其它的语言, `引入了全新的 for...of 循环`, 计划在以后的 ES 标准中 **`for...of 循环 将作为所有数据结构的统一方式`**
         - 换句话说，只要你明白 for...of 内部的工作原理，你就能使用它 去遍历任何数据
     - for...of 的基本使用
@@ -126,6 +179,7 @@
             - `value` 是当前迭代结果值
             - `done` 表示是否迭代结束
         - 其实 这就是 `for...of` 循环的工作原理
+    - 另外, `while 循环` 也能实现 `for...of` 相同的遍历
 
 - ## ES2015 实现可迭代接口
     - ### 结论:
@@ -426,3 +480,6 @@
             console.log(item)
         }
         ```
+
+
+- [学不动系列：从es2016-es2019](https://zhuanlan.zhihu.com/p/59096242)
