@@ -2,12 +2,19 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-03 15:06:46
+ * @LastEditTime: 2022-12-05 11:11:10
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 
+- [学不动系列：从es2016-es2019](https://zhuanlan.zhihu.com/p/59096242)
+
 - 目录
+    - []()
+    - [Object.assign](#Object.assign)
+    - []()
+    - []()
+    - []()
     - []()
     - [Set 数据结构](#Set-数据结构)
     - [Map 数据结构](#Map-数据结构)
@@ -23,6 +30,63 @@
     - []()
     - []()
 
+
+- ## Object.assign
+    - > **`Object.assign()`** 方法可以把任 意多个的源对象 自身的 可枚举属性 拷贝给目标对象，然后 **`返回目标对象`**
+    - Object.assign 基本用法
+        ```js
+        const target = {
+            a: 456,
+            c: 456
+        }
+
+        const source = {
+            a: 123,
+            b: 123
+        }
+
+        const result = Object.assign(target, source)
+
+        console.log(target) // { a: 123, c: 456, b: 123 }
+        console.log(target === result) // true // 返回的是第一个 对象
+        ```
+    - Object.assign 是深拷贝 还是浅拷贝 的问题
+        - 注意：当object只有一层的时候，是深拷贝
+        ```js
+        let obj = {
+            username: 'kobe'
+        };
+        let obj2 = Object.assign({}, obj);
+        obj2.username = '李世民';
+        console.log(obj); //{username: "kobe"}
+        ```
+        - > **`第一级属性深拷贝，从第二级属性开始就是浅拷贝。`**
+        ```js
+        //示例1  一层深拷贝
+        let obj = {
+            a: 1
+        }
+        let newObj = Object.assign({}, obj);
+        console.log(newObj); //{a: 1}
+        newObj.a = 2;
+        console.log(obj); //{a:1}
+        console.log(newObj); //{a: 2}
+
+
+        //示例2  二层浅拷贝
+        let obj = {
+            a: 1,
+            b: {
+                name: "zhangsan"
+            }
+        }
+        let newObj = Object.assign({}, obj);
+        console.log(newObj); //{a:1,b:{name:"zhangsan"}}
+        
+        newObj.b.name = "lisi";
+        console.log(obj); //{a:1,b:{name:"lisi"}}
+        console.log(newObj); //{a:1,b:{name:"lisi"}}
+        ```
 
 - ## Set 数据结构
     - ES2015 中提供了一个叫做 `Set` 的全新`数据结构`
@@ -540,5 +604,3 @@
         }
         ```
 
-
-- [学不动系列：从es2016-es2019](https://zhuanlan.zhihu.com/p/59096242)
