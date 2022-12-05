@@ -2,7 +2,7 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-05 11:40:06
+ * @LastEditTime: 2022-12-05 14:22:00
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,11 +13,13 @@
     - []()
     - [Object.assign](#Object.assign)
     - [Object.is](#Object.is)
-    - []()
+    - [Proxy](#Proxy)
     - []()
     - []()
     - [Set 数据结构](#Set-数据结构)
     - [Map 数据结构](#Map-数据结构)
+    - []()
+    - []()
     - [for...of 循环](#for...of-循环)
     - [可迭代接口 Iterable](#可迭代接口-Iterable)
     - [ES2015 实现可迭代接口](#ES2015-实现可迭代接口)
@@ -108,6 +110,58 @@
     - 但是，大多数情况 我们都不会用到 `Object.is` 这种方法
     - 还是尽量多用 `===` 严格相等运算符
     
+
+- ## Proxy
+    - Proxy 中文 代理对象
+    - `Object.defineProperty`
+        - 可以用来捕获 对象的读写过程
+        - 在 Vue 3.0 以前的版本 就是使用 Object.defineProperty 来实现的 **`数据响应`**, 从而完成 **`双向数据绑定`**
+    - ES2015 中全新设置了一个叫做 Proxy 的类型, 它是专门用来 **`为对象设置 访问代理器的`**
+        - 如果你不理解什么叫做 `代理`, 你可以把它理解成 `门卫`
+            - 不管你是进去 `拿东西`, 还是往里面 `放东西`
+            - 都必须要经过 `门卫 (代理)`
+        - 通过 Proxy 可以轻松监视 对象的读写过程
+    - 相比 `Object.defineProperty` , Proxy 功能更为强大, 使用更为方便
+    - Proxy 基本用法
+        ```js
+        const person = {
+            name: 'zce',
+            age: 20
+        }
+
+        // 第一个参数: 被代理的 目标对象
+        // 第二个参数: 代理的 处理对象
+        const personProxy = new Proxy(person, {
+            get (target, property) { // 监视属性 访问
+                // target: 我们代理的目标对象
+                // property: 外部访问的 属性名
+
+                // console.log(target, property) // { name: 'zce', age: 20 }
+                // return 100
+
+                // do something whatever you want
+                return property in target ? target[property] : undefined
+            },
+            set (target, property, value) { // 监视属性 设置
+                // value: 将要写入的 属性值
+
+                // 可以先做一些数据校验
+                if (property === 'age') {
+                    if (!Number.isInteger(value)) {
+                        throw new TypeError(`${value} is not an int`)
+                    }
+                }
+
+                target[property] = value
+            }
+        })
+
+        personProxy.name // zce
+        personProxy.xxx // undefined
+
+        personProxy.gender = true
+        ```
+
 - ## Set 数据结构
     - ES2015 中提供了一个叫做 `Set` 的全新`数据结构`
         - 你可以把它理解为 `集合`
