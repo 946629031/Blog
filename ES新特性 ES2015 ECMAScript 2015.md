@@ -2,7 +2,7 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-05 11:11:10
+ * @LastEditTime: 2022-12-05 11:40:06
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -12,7 +12,7 @@
 - 目录
     - []()
     - [Object.assign](#Object.assign)
-    - []()
+    - [Object.is](#Object.is)
     - []()
     - []()
     - []()
@@ -88,6 +88,26 @@
         console.log(newObj); //{a:1,b:{name:"lisi"}}
         ```
 
+
+- ## Object.is
+    - 在过去，我们判断是否相等 我们使用的是 `==` 或者 `===` 运算符
+        ```js
+        0 == false // true
+        0 === false // false
+        +0 === -0 // true     // 正负0 无法区分
+        NaN === NaN // false
+        ```
+    - NaN
+        - 在过去, Not a Number 非数字 意味着它有无限种可能, 所以不相等
+        - 但是在今天看来，Not a Number 其实是一个 `特别的值`, 所以应该 `NaN === NaN` 应该返回 true 才对
+    - 所以 ES2015 提出一种新的 同值比较的方法: `Object.is`
+    ```js
+    Object.is(+0, -0) // false   // 可以区分 正负0
+    Object.is(NaN, NaN) // true
+    ```
+    - 但是，大多数情况 我们都不会用到 `Object.is` 这种方法
+    - 还是尽量多用 `===` 严格相等运算符
+    
 - ## Set 数据结构
     - ES2015 中提供了一个叫做 `Set` 的全新`数据结构`
         - 你可以把它理解为 `集合`
