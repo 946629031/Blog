@@ -2,7 +2,7 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-06 09:20:57
+ * @LastEditTime: 2022-12-06 13:39:45
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -19,6 +19,10 @@
     - [Object.is](#Object.is)
     - [Proxy](#Proxy)
     - [Proxy 对比 Object.defineProperty](#Proxy-对比-Object.defineProperty)
+    - [Reflect](#Reflect)
+    - []()
+    - []()
+    - []()
     - []()
     - [Set 数据结构](#Set-数据结构)
     - [Map 数据结构](#Map-数据结构)
@@ -280,6 +284,57 @@
                     console.log('display', demo.display);
                     ```
                     - 上面方法中， display 和 _display 进行了绑定，也就是 `this.display === this._display` ，这样在访问器属性中获取或修改 _display 的时候，就不会触发 display 的方法了。
+
+
+- ## Reflect
+    - ES2015 新增的 全新内置对象, 目的是: **`统一的对象操作API`**
+    - Reflect 是一个静态类,
+        - 不能通过 ~~`new Reflect()`~~ 来构建一个实例对象
+        - 只能调用 静态类的 静态方法, 如: `Reflect.get()`
+            - 跟 `Math` 对象一样, 如: `Math.random(), Math.abs()`
+    - Reflect 内部封装了一系列 对 `对象的底层操作`
+        - 总共14个方法，废弃了一个，还剩下13个
+        - 看 Reflect 的文档, 你会发现 这13个方法的方法名，与 Proxy对象的 处理对象 的方法成员 是完全一致的
+            - > `Reflect 成员方法` 就是 `Proxy 处理对象的 默认实现`
+            - ![](./img/es2015/2.proxy-1.jpg)
+    - 实验
+        ```js
+        const obj = {
+            foo: 123,
+            bar: 456
+        }
+
+        const proxy = new Proxy(obj, {
+
+        })
+        ```
+        - 如果我 Proxy 的处理对象里面 什么都没写，那么它内部 这些成员方法 到底是如何执行的呢？
+            - 其实 Proxy 内部默认实现的逻辑, 就是调用了 Reflect 对应的方法
+            - 也就是说，如果我们没有定义 `get 方法`, 其实就等同于下面的 代码
+                ```js
+                const proxy = new Proxy(obj, {
+                    get (target, property) {
+                        return Reflect.get(target, property)
+                    }
+                })
+                ```
+    - 所以，当我们在 **`使用 Proxy 对象时，更标准的做法`** 是
+        - 先实现 自己的监视逻辑
+        - 然后 再调用 Reflect 对应的方法 (就像上面的代码一样)
+    - Reflect 最大的价值在于
+        - > 提供一套 统一的 用于操作对象的 API
+        - 在过去，我们操作对象的时候
+            - 有时候会使用 Object 上的一些方法, 如 `Object.keys()`
+            - 有时候会使用 `delete, in` 等的一些操作符
+                - 如 `delete obj.age`, `name in obj`
+            - 这样的话，会显得比较混乱 没有规律，对于新手 非常不友好
+        - 但是现在 Reflect 的出现，就是为了能够统一 一套操作方法
+            ```js
+            Reflect.has(obj, 'name') // 判断是否存在 某个属性
+            Reflect.deleteProperty(obj, 'age') // 删除属性
+            Reflect.ownKeys(obj) // 获取所有属性名
+            ```
+        - ECMAScript 期望: 经过一段时间后，慢慢的淘汰掉 以前的对象操作方式，取而代之的是 使用 Reflect 的对象操作方法
 
 - ## Set 数据结构
     - ES2015 中提供了一个叫做 `Set` 的全新`数据结构`
