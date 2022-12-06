@@ -2,7 +2,7 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-06 13:39:45
+ * @LastEditTime: 2022-12-06 17:23:49
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -20,7 +20,7 @@
     - [Proxy](#Proxy)
     - [Proxy 对比 Object.defineProperty](#Proxy-对比-Object.defineProperty)
     - [Reflect](#Reflect)
-    - []()
+    - [Promise](#Promise)
     - []()
     - []()
     - []()
@@ -335,6 +335,14 @@
             Reflect.ownKeys(obj) // 获取所有属性名
             ```
         - ECMAScript 期望: 经过一段时间后，慢慢的淘汰掉 以前的对象操作方式，取而代之的是 使用 Reflect 的对象操作方法
+
+- ## Promise
+    - ES2015 提供的 一个内置对象 
+        - > **`一种更优的 异步编程解决方案`**
+        - 通过链式调用的方式, 解决了 传统异步编程中 回调函数嵌套过深的问题
+    - Promise 中有很多内容, 这里不做详细介绍了
+        - 在 JavaScript 异步编程课程中详细分析
+
 
 - ## Set 数据结构
     - ES2015 中提供了一个叫做 `Set` 的全新`数据结构`
