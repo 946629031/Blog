@@ -2,19 +2,23 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-05 14:22:00
+ * @LastEditTime: 2022-12-06 09:20:57
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 
+# ES2015
+
 - [学不动系列：从es2016-es2019](https://zhuanlan.zhihu.com/p/59096242)
+
+----
 
 - 目录
     - []()
     - [Object.assign](#Object.assign)
     - [Object.is](#Object.is)
     - [Proxy](#Proxy)
-    - []()
+    - [Proxy 对比 Object.defineProperty](#Proxy-对比-Object.defineProperty)
     - []()
     - [Set 数据结构](#Set-数据结构)
     - [Map 数据结构](#Map-数据结构)
@@ -161,6 +165,121 @@
 
         personProxy.gender = true
         ```
+
+- ## Proxy 对比 Object.defineProperty
+    - Proxy 到底有哪些优势?
+        - 首先 Proxy 更为强大一些
+            - Object.defineProperty 只能监视属性的读写
+            - Proxy 能够监视到 **`更多对象操作`**
+                - 如 `delete 操作`, 或者 `对象方法调用` ...等
+    ```js
+    const person = {
+        name: 'ace',
+        age: 20
+    }
+
+    const personProxy = new Proxy(person, {
+        deleteProperty (target, property) {
+            console.log('delete', property)
+            // do something whatever you want
+
+            delete target[property]
+        }
+    })
+
+    delete personProxy.age // delete age
+    ```
+    - ### Proxy 可监听操作
+    ![](./img/es2015/2.proxy-1.jpg)
+    - Proxy 更好的支持数组对象的监视
+        - 以前，我们通过 Object.defineProprty 去监视 数组的操作
+            - 最常见的方式 就是 重写数组的操作方法 (`这也是 Vue.js 所使用的方式`)
+                - 大体的思路是 通过自定义的方法，覆盖掉 Array.property 上面的 push, pop, shift... 等方法
+                - 以此来劫持 这个方法的 调用过程
+    - 如何使用 Proxy 对象监视数组
+        ```js
+        var list = []
+
+        var listProxy = new Proxy(list, {
+            set(target, property, value) {
+                console.log('set', property, value)
+                target[property] = value
+                return true
+            }
+        })
+
+        listProxy.push(100)
+
+        set 0 100 // 0 是下标 也是property
+        set length 1
+        ```
+    - 这是 Proxy 对数组的监视，功能还是非常强大的
+        - 但是如果 要用 Object.defineProperty 来实现，就会非常的麻烦
+    - Proxy 的另一个优势:
+        - > Proxy 是以 **`非侵入的方式`** 监管了对象的读写
+            - 也就是说 一个已经定义好的对象，我们不需要对 对象本身 做任何的操作, 就可以监视到 它内部的所有成员的 读写
+        - 而 Object.defineProperty 它就要求我们 必须通过特定的方式
+            ```js
+            const person = {}
+
+            Object.defineProperty(person, 'name', {
+                get() {
+                    console.log('name 被访问')
+                    return this._name
+                },
+                set (value) {
+                    console.log('name 被设置')
+                    this._name = value
+                }
+            })
+            Object.defineProperty(person, 'age', {
+                get() {
+                    console.log('age 被访问')
+                    return this._age
+                },
+                set (value) {
+                    console.log('age 被设置')
+                    this._age = value
+                }
+            })
+
+            person.name = 'jack'
+            ```
+            - > 为什么 上面的 this._name 去掉下划线后，会报错 `Uncaught RangeError: Maximum call stack size exceeded` <br>
+                - 参考 [Object.defineProperty: Uncaught RangeError: Maximum call stack size exceeded
+ ](https://stackoverflow.com/questions/41803778/using-getter-and-setter-with-object-defineproperty)
+                - [使用Object.definePropety报错 Maximum call stack size exceeded](https://blog.csdn.net/EcbJS/article/details/108797860)
+                    - 最近在监听界面样式变化是，用到了 Object.definePropety 使用过程中，报错 Maximum call stack size exceeded 翻译为： 超出了最大调用堆栈大小 。
+
+                    - 使用方法如下：
+                    ```js
+                    let demo = document.getElementById('demo').style;
+                    Object.defineProperty(demo, 'display', {
+                        get: function () {
+                            return this.display;
+                        },
+                        set: function (value) {
+                            this.display = value;
+                        }
+                    });
+                    console.log('display', demo.display);
+                    ```
+                    - 上面方法看似没什么问题，但是执行后会报，超出了最大调用堆栈大小错误，这是因为，当打印 demo.display 的时候，触发了 `访问器属性 getter` ，而 get 里面会返回 `this.display` ，程序遇到这个 this.display 后，要去获取这个变量里面的值，就又一次的触发了 访问器属性 getter ，如此递归下去，没有终止条件，最后超出堆栈限制报错。
+
+                    - 所以需要修改一下。具体修改方法是创建一个新的变量去存储。如下：
+                    ```js
+                    let demo = document.getElementById('demo').style;
+                    Object.defineProperty(demo, 'display', {
+                        get: function () {
+                            return this._display || 'none';
+                        },
+                        set: function (value) {
+                            this._display = value;
+                        }
+                    });
+                    console.log('display', demo.display);
+                    ```
+                    - 上面方法中， display 和 _display 进行了绑定，也就是 `this.display === this._display` ，这样在访问器属性中获取或修改 _display 的时候，就不会触发 display 的方法了。
 
 - ## Set 数据结构
     - ES2015 中提供了一个叫做 `Set` 的全新`数据结构`
