@@ -2,7 +2,7 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-06 17:23:49
+ * @LastEditTime: 2022-12-07 09:17:59
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -21,7 +21,7 @@
     - [Proxy 对比 Object.defineProperty](#Proxy-对比-Object.defineProperty)
     - [Reflect](#Reflect)
     - [Promise](#Promise)
-    - []()
+    - [Class](#Class)
     - []()
     - []()
     - [Set 数据结构](#Set-数据结构)
@@ -343,6 +343,35 @@
     - Promise 中有很多内容, 这里不做详细介绍了
         - 在 JavaScript 异步编程课程中详细分析
 
+- ## Class
+    - 在此之前，ECMAScript 都是通过 定义函数, 以及 原型对象 来实现 Class
+        - 例如，我们要实现一个 Person 类型
+            ```js
+            function Person (name) { // 我们要先定义一个 Person 函数
+                this.name = name // 通过 this 访问当前实例对象
+            }
+
+            Person.prototype.say = function () { // 通过 Prototype 去共享实例之间的 成员
+                console.log(`hi, my name is ${this.name}`)
+            }
+            ```
+    - 在 ES2015 开始, 我们可以通过 一个叫做 `Class` 的关键词, 来 `声明一个类型`
+        - 这种 `Class` 声明类型的形式, 相比 ES2015 以前 通过 定义函数 的形式
+            - 更容易理解，结构更加清晰
+        ```js
+        class Person {
+            constructor (name) {
+                this.name = name
+            }
+
+            say () {
+                console.log(`hi, my name is ${this.name}`)
+            }
+        }
+
+        const p = new Person('tom')
+        p.say()
+        ```
 
 - ## Set 数据结构
     - ES2015 中提供了一个叫做 `Set` 的全新`数据结构`
