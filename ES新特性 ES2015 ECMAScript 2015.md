@@ -2,7 +2,7 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-07 16:08:03
+ * @LastEditTime: 2022-12-07 17:03:09
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -29,7 +29,7 @@
     - [Set 数据结构](#Set-数据结构)
     - [Map 数据结构](#Map-数据结构)
     - [Symbol](#Symbol)
-    - []()
+    - [Symbol 补充](#Symbol-补充)
     - [for...of 循环](#for...of-循环)
     - [可迭代接口 Iterable](#可迭代接口-Iterable)
     - [ES2015 实现可迭代接口](#ES2015-实现可迭代接口)
@@ -682,6 +682,75 @@
     将来还会新增 `BigInt` 原始类型, 用来存放 更长的数字 (只不过 目前 这个类型还处在 stage-4 阶段, 下一个版本 就能被标准化) <br>
     标准化过后 就是 8种数据类型了
 
+- ## Symbol 补充
+    - Symbol 每次生成的值, 都是全新的值
+        ```js
+        Symbol() === Symbol() // false
+        
+        Symbol('foo') === Symbol('foo') // false // 传入相同的字符串 也不行
+        ```
+    - 如果我们需要 在全局 去复用同一个 Symbol 值
+        - 方式一: 挂载到 全局变量
+        - 方式二: 使用 Symbol 提供的静态方法 去实现
+        ```js
+        const s1 = Symbol.for('foo')
+        const s2 = Symbol.for('foo')
+
+        s1 === s2 // true
+        ```
+        - **`Symbol.for()`** 方法
+            - 它可以接受 一个 字符串 作为入参
+            - `相同的字符串, 就一定会 返回相同的 Symbol 值`
+            - 它内部维护了一个全局注册表
+                - 为我们的 `字符串` 和 `Symbol值` 提供了 一一对应的关系
+                    - 如果 传入的不是字符串, 则会默认转成 字符串
+                    ```js
+                    Symbol.for(true) === Symbol.for('true') // true
+                    ```
+        - 其它 Symbol 常量
+            ```js
+            Symbol.iterator    // Symbol(Symbol.iterator)
+            Symbol.hasInstance  // Symbol(Symbol.hasInstance)
+            ```
+            - 这些标识符 可以让 自定义对象 实现一些, JS 中内置的 接口
+                - 例如
+                    ```js
+                    const obj = {}
+                    obj.toString() // [object Object] // 后面这个 Object, 我们将其称之为 object 标签
+                    ```
+                    - 那么 如果我们要自定义 这个 object 标签
+                    ```js
+                    const obj = {
+                        [Symbol.toStringTag]: 'XObject'
+                    }
+                    obj.toString() // '[object XObject]'
+                    ```
+                    - `Symbol.toStringTag` 也是一种 `Symbol 常量`
+                    - 类似的 Symbol 产量, 我们在实现 迭代器 的时候会经常用到
+    - Object 的 Symbol 值, 无法被常规方式拿到
+        ```js
+        const obj = {
+            [Symbol()]: 'symbol value',
+            foo: 'normal value'
+        }
+
+        for (let key in obj) { // foo  // for 循环无法拿到
+            console.log(key)
+        }
+
+        Object.keys(obj) // ['foo']  // Object.keys 也无法拿到
+
+        JSON.stringify(obj) // '{"foo":"normal value"}' // 也会被忽略
+        ```
+    - **`Object.getOwnPropertySymbols()`**
+        - 当然 也不是完全没办法拿到 对象中的 Symbol 值, 可以通过 `Object.getOwnPropertySymbols()` 方法来拿
+            - 它非常类似于 `Object.keys()` 方法
+            - 区别在于
+                - `Object.keys()` 获取到的都是 字符串 属性名
+                - `Object.getOwnPropertySymbols()` 获取到的都是 Symbol 属性名
+        ```js
+        Object.getOwnPropertySymbols(obj) // [Symbol()]
+        ```
 
     
 - ## for...of 循环
