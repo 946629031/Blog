@@ -2,7 +2,7 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-07 09:17:59
+ * @LastEditTime: 2022-12-07 10:42:06
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -22,7 +22,7 @@
     - [Reflect](#Reflect)
     - [Promise](#Promise)
     - [Class](#Class)
-    - []()
+    - [静态方法](#静态方法)
     - []()
     - [Set 数据结构](#Set-数据结构)
     - [Map 数据结构](#Map-数据结构)
@@ -372,6 +372,65 @@
         const p = new Person('tom')
         p.say()
         ```
+
+- ## 静态方法
+    - `static` 静态成员
+    - 在类型中的方法, 一般分为 `实例方法` vs `静态方法`
+        - 实例方法
+            - 要通过这个 类型 构造的实例对象 去调用
+        - 静态方法
+            - 直接通过 类型本身 去调用
+    - ES5 的静态方法
+        - 以前我们实现 静态方法, 我们是 直接在 构造函数对象上 去挂载方法 实现
+            - 因为在 js 中, 函数也是对象, 他也可以添加一些 方法成员
+            
+        - [es5 es6静态方法、类、单例模式](https://www.jianshu.com/p/5ce2416058a0)
+            - es5中的类和静态方法
+                ```js
+                function Person(name,age) {
+                //构造函数里面的方法和属性
+                    this.name=name;
+                    this.age=age;
+                    this.run=function(){
+                        console.log(`${this.name}---${this.age}`)
+                    }
+                }
+                //原型链上面的属性和方法可以被多个实例共享
+                Person.prototype.sex='男';
+                Person.prototype.work=function(){
+                    console.log(`${this.name}---${this.age}---${this.sex}`);
+                }
+                //静态方法
+                Person.setName=function(){ // 因为在 js 中, 函数也是对象, 他也可以添加一些 方法成员
+                    console.log('静态方法');
+                }
+                var p=new Person('zhangsan','20');   /*实例方法是通过实例化来调用的，静态是通过类名直接调用*/
+                p.run();
+                p.work();
+
+                Person.setName();  /*执行静态方法*/
+                ```
+    - ES2015
+        - ES2015 中新添加静态成员的 static 关键词
+            ```js
+            class Person {
+                constructor (name) {
+                    this.name = name /*属性*/
+                }
+
+                say () { /*实例方法*/
+                    console.log(`hi, my name is ${this.name}`)
+                }
+
+                static create (name) { /*静态方法*/
+                    console.log(this)  // 由于静态方法 是挂载在类型上的, 所以它的 this 不会指向 任何一个 实例对象, 而是指向当前的 类型
+                    return new Person(name)
+                }
+            }
+
+            const tom = Person.create('tom')
+            tom.say()
+            ```
 
 - ## Set 数据结构
     - ES2015 中提供了一个叫做 `Set` 的全新`数据结构`
