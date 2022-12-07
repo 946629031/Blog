@@ -2,12 +2,14 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-07 10:42:06
+ * @LastEditTime: 2022-12-07 11:17:51
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 
 # ES2015
+> ECMAScript 5 也称为 ES5 和 ECMAScript 2009 <br>
+> ECMAScript 6 也称为 ES6 和 ECMAScript 2015
 
 - [学不动系列：从es2016-es2019](https://zhuanlan.zhihu.com/p/59096242)
 
@@ -23,7 +25,7 @@
     - [Promise](#Promise)
     - [Class](#Class)
     - [静态方法](#静态方法)
-    - []()
+    - [类的继承](#类的继承)
     - [Set 数据结构](#Set-数据结构)
     - [Map 数据结构](#Map-数据结构)
     - []()
@@ -431,6 +433,42 @@
             const tom = Person.create('tom')
             tom.say()
             ```
+
+- ## 类的继承
+    - 关键词: `extends`
+        - ES2015 新增的关键词
+    - 继承 是面向对象 一个非常重要的特性
+        - 通过 继承这种特性, 我们就能 `抽象出来`, 相似类型之间 `重复的地方`
+    - 在之前 ES5 中, 我们都是通过 Prototype 原型的方式 来实现继承
+    - ES2015 类的继承
+        - > `extends` 的继承方式, 相比于 ES5 的原型继承, 更方便, 更清晰
+        ```js
+        class Person {
+            constructor (name) {
+                this.name = name
+            }
+
+            say () {
+                console.log(`hi, my name is ${this.name}`)
+            }
+        }
+
+        class Student extends Person {
+            constructor (name, number) {
+                super(name) // super 调用它 就是调用了 父类的构造函数
+                this.number = number
+            }
+
+            hello () {
+                super.say() // 使用 super 去访问父类的成员
+                console.log(`my school number is ${this.number}`, super)
+            }
+        }
+
+        const s = new Student('jack', 100)
+        s.hello()
+        ```
+
 
 - ## Set 数据结构
     - ES2015 中提供了一个叫做 `Set` 的全新`数据结构`
