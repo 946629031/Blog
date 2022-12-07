@@ -2,7 +2,7 @@
  * @Author: threeki 946629031@qq.com
  * @Date: 2022-11-29 15:29:56
  * @LastEditors: threeki 946629031@qq.com
- * @LastEditTime: 2022-12-07 11:17:51
+ * @LastEditTime: 2022-12-07 16:08:03
  * @FilePath: /Blog/ES新特性 ES2015.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -28,7 +28,7 @@
     - [类的继承](#类的继承)
     - [Set 数据结构](#Set-数据结构)
     - [Map 数据结构](#Map-数据结构)
-    - []()
+    - [Symbol](#Symbol)
     - []()
     - [for...of 循环](#for...of-循环)
     - [可迭代接口 Iterable](#可迭代接口-Iterable)
@@ -581,6 +581,109 @@
         Map.prototype.set()
         Map.prototype.values()
         ```
+
+- ## Symbol
+    - ES2015 新增的 `一种全新的原始数据类型`
+    - 在 ES2015 之前
+        - 对象的属性名, 都是 **`字符串`**
+        - 而 `字符串` 是 **`有可能重复的`**
+        - 如果 重复的话, `就会产生冲突`
+        - 例如
+            ```js
+            // shared.js  #################
+            const cache = {} // 我们约定这里有一个 缓存对象, 而且 这个缓存对象 是全局共享的
+
+
+            // a.js  #################
+            cache['foo'] = Math.random()
+
+            // b.js  #################
+            // 假设我在 b.js 中, 我不知道 已经存在了 foo 的键, 我又去写入了 foo 的数据
+            // 就会导致 a.js 中, 已经写入的数据 被覆盖了
+            // 产生了冲突
+            cache['foo'] = 123
+            ```
+        - 这种情况 在我们的开发中，是很常见的
+            - > 现如今 我们大量使用 第三方模块 <br>
+            很多时候 我们需要去 扩展第三方模块中的 对象 <br>
+            此时, 你是不知道 第三方模块中 是否已经存在 某一个指定的 键 <br>
+            如果说, 此时你贸然去 扩展, 就很容易导致 `键名` 冲突的问题
+        - 在以前, 解决这种问题 最好的方式 就是 —— **`约定`**
+            - 例如, 我们约定
+                - 在 a.js 中，往缓存放入的数据 键名 都是以 `a_` 开头, 如 `cache['a_foo'] = Math.random()`
+                - 在 b.js 中，往缓存放入的数据 键名 都是以 `b_` 开头, 如 `cache['b_foo'] = 123`
+            - 这样就能 **`规避`** 掉这种 `键名冲突` 的问题
+                - > 但是, 规避问题 并不是解决问题 <br>
+                问题依然存在 <br>
+                `如果 有人不遵守约定`, 随便命名 还是会产生 `键名冲突` 的问题
+    - ES2015 为了解决这种问题
+        - 它新增了一种全新的 原始数据类型: `Symbol`, 中文翻译: 符号
+        - Symbol 的作用: 它能生成一个 `独一无二的值`
+        - > 每一次 `Symbol()` 创建的值都是 **`独一无二的, 永远不会重复`**
+            ```js
+            const s = Symbol()
+
+            console.log(s)          // Symbol()
+            console.log(typeof s)   // symbol
+
+            Symbol() === Symbol()   // false  // 永远不会重复
+            ```
+        - 考虑到 开发过程中的 调试, 它允许我们传入一个字符串 来作为 `描述文本`
+            - 在多次使用 Symbol 的情况, 我们在控制台中 就能 区分出来 到底是哪一个 Symbol
+            ```js
+            Symbol('foo') // Symbol(foo)
+            Symbol('bar') // Symbol(bar)
+            Symbol('ace') // Symbol(ace)
+            ```
+        - > 从 ES2015 开始, Object 可以使用 Symbol 的值 作为属性名了
+            - 也就是说, 现在 Object 的属性名 可以是两种类型
+                - String
+                - Symbol
+            ```js
+            const obj = {
+                [Symbol('ace')]: 'hello' // 计算属性名的方式去给 属性名赋值
+            }
+
+            obj[Symbol()] = '123'
+            obj[Symbol()] = '456'
+
+            console.log(obj) // {Symbol(ace): 'hello', Symbol(): '123', Symbol(): '456'}
+            ```
+            - 因为 每个 Symbol 生成的值 都是独一无二的，所以在 对象中 就不用担心 属性名冲突的问题了
+    - Symbol 实现 私有成员
+        - Symbol 除了可以 用来避免 对象属性名 冲突的问题外
+        - 还可以利用它 独一无二的 特点, 来模拟实现 `对象的私有成员`
+        - 在过去, 我们定义私有成员 都是靠 **`约定`**
+            - 例如我们 约定 以 `_` 开头的都是私有成员
+            - 约定 外界不允许访问 以 `_` 开头的私有成员
+        - 现在 我们利用 Symbol 实现 私有成员
+            ```js
+            // a.js ####################
+            const name = Symbol()
+
+            const person = {
+                [name]: 'ace',
+                say () {
+                    console.log(this[name]) // 在这个文件内部 我们可以通过变量, 拿到 同一个 Symbol 的值
+                }
+            }
+
+
+            // b.js ####################
+            // 而在外部其它文件, 由于我们无法创建 一个一摸一样的 Symbol值
+            
+            person[Symbol()] // 所以无法读取 该属性
+            person.say()     // 只能调用 这个对象的 普通成员
+            ```
+            - 这样的话, 就实现了 私有成员
+    - > Symbol 最主要的作用 就是为 对象添加独一无二的 属性名
+    - > 截止到 ES2019 <br>
+    6种基本数据类型, 1种 Object 类型, 共7种数据类型 <br>
+    将来还会新增 `BigInt` 原始类型, 用来存放 更长的数字 (只不过 目前 这个类型还处在 stage-4 阶段, 下一个版本 就能被标准化) <br>
+    标准化过后 就是 8种数据类型了
+
+
+    
 - ## for...of 循环
     - 在 ECMAScript 中，遍历数据有很多种方法
         - `for`循环，比较适合遍历 普通数组
