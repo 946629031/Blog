@@ -1,17 +1,19 @@
 # 基于 UniAPP从入门到社区项目实战
-课程背景:
+- 官网 https://zh.uniapp.dcloud.io/
 
-> 咱们作为前端开发人员,单纯的Web端开发已经慢慢无法满足我们的业务需求了,微信小程序、安卓APP、IOS APP,甚至是 Windows 桌面端开发都成了我们需要掌握的技能。所以呢,市面上各种「跨平台」开发解决方案 层出不穷,比较有代表性的就是:UniAPP、Flutter、 React Native、Taro、Weex等等。
->
-> UniAPP 是基于「Vue+微信小程序」语言体系,开发人员上手快学习成本低,同时随着如今UniAPP生态也逐 步趋于成熟。所以,基于UniAPP开发多端项目,已经是很多中小型企业常用的技术解决方案。
->
-> 那么,今天呢,我们就从 UniAPP基础开始,对照企业级实践标准,从零到一,一步一步打造一个 多端(微信 小程序 + H5 + 安卓APP+IOS APP)的社区论坛类项目。
+- 课程背景:
+
+    > 咱们作为前端开发人员,单纯的Web端开发已经慢慢无法满足我们的业务需求了,微信小程序、安卓APP、IOS APP,甚至是 Windows 桌面端开发都成了我们需要掌握的技能。所以呢,市面上各种「跨平台」开发解决方案 层出不穷,比较有代表性的就是: UniAPP、Flutter、 React Native、Taro、Weex等等。
+    >
+    > UniAPP 是基于「Vue+微信小程序」语言体系,开发人员上手快学习成本低,同时随着如今UniAPP生态也逐 步趋于成熟。所以,基于UniAPP开发多端项目,已经是很多中小型企业常用的技术解决方案。
+    >
+    > 那么,今天呢,我们就从 UniAPP基础开始,对照企业级实践标准,从零到一,一步一步打造一个 多端(微信 小程序 + H5 + 安卓APP+IOS APP)的社区论坛类项目。
 
 
-> 学前须知:
-> 1. 掌握 HTML、CSS、JS基础,能够构建静态页面
-> 2. 掌握 Vue 基础,能够使用脚手架构建应用
-> 3. 掌握微信小程序基础,对微信小程序组件、API服务有一定的了解
+    > 学前须知:
+    > 1. 掌握 HTML、CSS、JS基础,能够构建静态页面
+    > 2. 掌握 Vue 基础,能够使用脚手架构建应用
+    > 3. 掌握微信小程序基础,对微信小程序组件、API服务有一定的了解
 
 
 - 课程简介:
@@ -282,7 +284,213 @@ UniAPP 快速入门学习
 
 
 
+    - ### (3)获取当前页面栈
+        > getCurrentPages()函数用于获取当前页面栈的实例,以数组形式按栈的顺序给出,第一个元素为首页,最后一个 元素为当前页面。
+        >
+        > 注意: getCurrentPages()仅用于展示页面栈的情况,请勿修改页面栈,以免造成页面状态错误。
+    - ### (4)路由传参与接收
+        > 说明:页面生命周期的 onLoad()监听页面加载,其参数为上个页面传递的数据,如:
+        ```js
+        //页面跳转并传递参数
+        uni.navigateTo({
+            url: 'page2?name=liy&message=Hello'
+        })
+        ```
+        > url为将要跳转的页面路径,路径后可以带参数。参数与路径之间使用?分隔,参数键与参数值用"相连,不同 参数用 & 分隔。如 `'path?key1=value2&key2=value2'`, path为下一个页面的路径,下一个页面的onLoad函数可得 到传递的参数。
+        ```js
+        // 页面 2 接收参数
+        onLoad: function (option) { //option为object类型,会序列化上个页面传递的参数
+            console.log(option.name); //打印出上个页面传递的参数。
+            console.log(option.message); //打印出上个页面传递的参数。
+        }
+        ```
+        > 注意: url 有长度限制,太长的字符串会传递失败,并且不规范的字符格式也可能导致传递失败,所以对于复杂 参数建议使用 encodeURI、decodeURI 进行处理后传递
+    - ### (5)小程序路由分包配置
+        > 因小程序有体积和资源加载限制,各家小程序平台提供了分包方式,优化小程序的下载和启动速度。
+        > 所谓的主包,即放置默认启动页面及 TabBar 页面,而分包则是根据 pages.json 的配置进行划分。
+        > 在小程序启动时,默认会下副主包并启动主包内页面,当用户进入分包内某个页面时,会把对应分包自动下载下来,下载完成后再进行展示,此时终端界面会有等待提示。
+
+        ```js
+        // /pages.json
+
+        "subPackages": [{
+            "root":"news".
+            "pages": [{
+                "path":"index",
+                "style": {
+                    "navigationBarTitleText" : "新闻中心”,
+                    "navigationBarBackgroundColor":"#FFFFFF",
+                    "navigationBarTextStyle":"black",
+                    "backgroundColor": "#FFFFFF"
+                }
+            }]
+        }],
+        // 预下载分包设置
+        "preloadRule": {
+            "pages/index": {
+                "network": "all",
+                "packages": ["activities"]
+            }
+        }
+        ```
+
+
+- ## 五、UniAPP 常用组件简介
+    - 官网组件库 https://zh.uniapp.dcloud.io/component/
+    > uni-app 为开发者提供了一系列基础组件,类似 HTML 里的基础标签元素,但 uni-app 的组件与 HTML 不同,而 是与小程序相同,更适合手机端使用。
+
+    > 虽然不推荐使用 HTML 标签,但实际上如果开发者写了div等标签,在编译到非H5平台时也会被编译器转换为 view 标签,类似的还有 span 转 text、a转 navigator 等,包括 Css里的元素选择器也会转,但为了管 理方便、策略统一,新写代码时仍然建议使用view等组件。
+
+    > 开发者可以通过组合这些基础组件进行快速开发,基于内置的基础组件,可以开发各种扩展组件,组件规范与 vue组件相同。
+
+    案例:知心姐姐聊天功能, [代码地址](https://blog.csdn.net/beiluol/article/details/129335066)
+
+
+
+- ## 六、UniAPP 常用API简介
+    - 官网 API https://zh.uniapp.dcloud.io/api/
+    > uni-app 的js代码,h5 端运行于浏览器中,非 h5 端 Android 平台运行在 v8 引擎中,iOS 平台运行在 iOS 自带 的 jscore 引擎中。所以,uni-app 的js API 由标准 ECMAScript的js API 和uni 扩展 API 这两部分组成。
+
+    > ECMAScript 由 Ecma 国际管理,是基础 js 语法。浏览器基于标准 js 扩充了window、document 等js API; Node.js 基于标准 js 扩充了 fs 等模块;小程序也基于标准 js 扩展了各种 wx.xx、my.xx、swan.xx 的API。 
+    > 
+    > 标准 ecmascript 的API非常多,比如:console、settimeout等等。
+
+    > 非 H5 端,虽然不支持 window、document、navigator 等浏览器的js API,但也支持标准 ECMAScript。
+    > 
+    > 开发者不要把浏览器里的js 等价于标准 js。
+    > 
+    > 所以 uni-app 的非 H5 端,一样支持标准js,支持if、for 等语法,支持字符串、数组、时间等变量及各种处理方 法,仅仅是不支持浏览器专用对象。
+
+    案例:知心姐姐聊天功能, [代码地址](https://blog.csdn.net/beiluol/article/details/129335066)
 
 
 
 
+- ## 七、UniAPP 自定义组件与通信
+
+    - ### (1)自定义组件概念
+        > 组件是 vue 技术中非常重要的部分,组件使得与ui相关的轮子可以方便的制造和共享,进而使得vue使用者的 开发效率大幅提升,在项目的 component 目录下存放组件, uni-app 只支持 vue 单文件组件(vue 组件)
+
+        > 组件可以使用「全局注册」和「页面引入」两种方式进行使用,使用分为三步: <br>
+        > 导入 `import xxx from 'xxx'` <br>
+        > 注册 `Vue.use('xx',xx)` `components:{ xxx }`<br>
+        > 使用 `<xx />`
+
+    - ### (2)父子组件通信
+        > 1.父组件通过自定义属性向子组件传递数据
+        > 
+        > 2.子组件通过 `props` 接收父组件传递的数据
+
+        > 1.父组件通过自定义事件标签向子组件传递事件
+        > 
+        > 2.子组件通过触发父组件定义事件方式修改父组件数据
+
+        - 全局通信、组件间通信
+            ```js
+            uni.$on('eventName', () => {})
+
+            uni.$emit('eventName', params)
+            ```
+
+    - ### (3) slot 数据分发与作用域插槽
+        > 1.父组件通过调用子组件内部嵌套 html 内容作为 slot 分发给子组件
+        >
+        > 2.子组件通过在 slot 标签上添加属性,向父组件通信数据,作用域插槽
+
+
+- ## 八、UniAPP Vuex 状态管理
+    - 1.概念
+        > Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。它采用集中式存储管理应用的所有组件的状态,并以相 应的规则保证状态以一种可预测的方式发生变化。
+    - 2.应用场景
+        > Vue多个组件之间需要共享数据或状态。
+    - 3.关键规则
+        > `State`: 存储状态数据
+        > 
+        > `Getter`: 从状态数据派生数据,相当于 State 的计算属性
+        > 
+        > `Mutation`: 存储用于同步更改状态数据的方法,默认传入的参数为 state
+        > 
+        > `Action`: 存储用于异步更改状态数据,但不是直接更改,而是通过触发 Mutation 方法实现,默认参数为  context
+        > 
+        > `Module`: Vuex 模块化
+
+    - 4.交互关系
+        ![vuex-work-flow](./img/uni-app/vuex.png)
+
+    - 5.代码
+        ```js
+        // /main.js
+        import Vue from 'vue'
+        import App from './App'
+
+        Vue.config.productionTip = false
+        App.mpType = 'app'
+
+        // 调用 store vuex 状态管理 
+        import store from '@/store/index.js'
+        const app = new Vue({
+            ...App,
+            store
+        })
+
+        app.$mount()
+        ```
+        ```js
+        // /store/index.js
+        import Vue from 'vue'
+        import Vuex from 'vuex' Vue.use(Vuex)
+
+        const store = new Vuex.Store({
+            state: {
+                userName: '用户未登录
+            },
+            mutations: {
+                MLOGIN(state, userName) {
+                    state.userName = userName
+                },
+                MLOGOUT(state) {
+                    state.userName = '退出用户状态'
+                }
+            },
+            actions: {
+                login(context, userName) {
+                    context.commit('MLOGIN', userName)
+                },
+                logout (context){
+                    context.commit('MLOGOUT')
+                }
+            }
+        })
+
+        export default store
+        ```
+        ```html
+        <!-- /pages/list.vue -->
+
+        <template>
+            <view>
+                <text>通讯录</text>
+                <view>{{userName}}</view>
+                <view>
+                    <button type="default" @click="login('蜡笔小新')">登陆</button>
+                    <button type="default" @click="logout">登出</button>
+                </view>
+            </view>
+        </template>
+
+        <script>
+        import { mapState, mapActions } from 'vuex'
+
+        export default {
+            data() {
+                return { }
+            },
+            computed:{
+                ...mapState(['userName'])
+            },
+            methods: {
+                ...mapActions(['login', 'logout'])
+            }
+        }
+        </script>
+        ```
