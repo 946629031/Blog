@@ -494,3 +494,86 @@ UniAPP 快速入门学习
         }
         </script>
         ```
+
+
+- ## 九、运行环境判断与跨端兼容
+    - ### (1)开发环境和生产环境
+        > uni-app 可通过 process.env.NODE_ENV 判断当前环境是开发环境还是生产环境,一般用于连接测试服务 器或生产服务器的动态切换。
+        > 
+        > 在HBuilderX 中,点击「运行」编译出来的代码是开发环境,点击「发行」编译出来的代码是生产环境
+
+        ```js
+        if (process.env.NODE_ENV === 'development'){
+            console.log('开发环境')
+        } else {
+            console.log('生产环境')
+        }
+        ```
+        
+    - ### (2)判断平台
+        > 平台判断有2种场景,一种是在编译期判断,一种是在运行期判断。
+
+        > 编译期判断编译期判断,即条件编译,不同平台在编译出包后已经是不同的代码,
+        ```js
+        // #ifdef HS
+        alert("只有h5平台才有alert方法")
+        // #endif
+        // 如上代码只会编译到H5的发行包里,其他平台的包不会包含如上代码。
+        ```
+
+        > 运行期判断 运行期判断是指代码已经打入包中,仍然需要在运行期判断平台,此时可使用
+        > `uni.getSystemInfoSync().platform` 判断客户端环境是 Android、iOS还是小程序开发工具
+
+        ```js
+        switch(uni.getSystemInfoSync().platform) {
+            case 'android':
+                console.log('运行Android上')
+                break;
+            case 'ios':
+                console.log('运行IOS上')
+                break;
+            default:
+                console.log('运行在开发者工具上')
+                break;
+        }
+        ```
+
+
+
+    - ### (3)跨端兼容
+        > uni-app 已将常用的组件、JS API 封装到框架中,开发者按照 uni-app 规范开发即可保证多平台兼容,大部分业 务均可直接满足,但每个平台有自己的一些特性,因此会存在一些无法跨平台的情况。
+        >
+        > 大量写 if else,会造成代码执行性能低下和管理混乱。
+        > 编译到不同的工程后二次修改,会让后续升级变的很麻烦。
+        >
+        > 在C语言中,通过 #ifdef、#ifndef 的方式,为 windows、mac 等不同 os 编译不同的代码。 uni-app 参考这个 思路,为 uni-app 提供了条件编译手段,在一个工程里优雅的完成了平台个性化实现。
+
+        > 条件编译是用特殊的注释作为标记,在编译时根据这些特殊的注释,将注释里面的代码编译到不同平台。
+        >
+        > 写法:以 #ifdef 或 #ifndef 加 %PLATFORM% 开头,以 #endif 结尾。
+        >
+        > - #ifdef: if defined 仅在某平台存在
+        > - #ifndef: if not defined 除了某平台均存在
+        > - %PLATFORM%:平台名称
+
+        - %PLATFORM% 可取值如下:
+
+        值|平台
+        |----|----|
+        APP-PLUS | App
+        APP-PLUS-NVUE | App nvue
+        H5 | H5
+        MP-WEIXIN | 微信小程序
+        MP-ALIPAY | 支付宝小程序
+        MP-BAIDU | 百度小程序
+        MP-TOUTIAO | 字节跳动小程序
+        MP-QQ | QQ小程序
+        MP-360 | 360小程序
+        MP | 微信小程序/支付宝小程序/百度小程序/字节跳动小程序/QQ小程序/368小程序
+        QUICKAPP-WEBVIEW | 快应用通用(包含联盟、华为)
+        QUICKAPP-WEBVIEW-UNION | 快应用联盟
+        QUICKAPP-WEBVIEW-HUAWEI | 快应用华为
+        
+        
+        
+
