@@ -7,8 +7,19 @@
     - [语法基础](#语法基础)
     - [代码注释](#代码注释)
     - [运行代码](#运行代码)
-    - []()
-    - []()
+    - [数据类型]()
+        - [数据类型 - Number](#数据类型---number)
+        - [数据类型 - List](#数据类型---list)
+        - [数据类型 - Set](#数据类型---set)
+        - [数据类型-Map](#数据类型-map)
+        - [数据类型-其他: Runes , Symbol , Dynamic](#数据类型-其他-runes--symbol--dynamic)
+        - []()
+        - []()
+        - []()
+        - []()
+        - []()
+        - []()
+        - []()
 - []()
 - []()
 - []()
@@ -317,226 +328,298 @@
             - `final time = DateTime.now();` // **`成功`**-可以将运行时的值分配给 final 变量
 
 
+    - ## 数据类型
+        - ### 数据类型 - Number
 
-- ## 数据类型 - Number
+        - ### 数据类型 - List
+            - Dart 中的数组,由 List 对象表示。 List 有两种声明方式
+                - 字面量方式
+                    ```
+                    List list = []; //不限定元素的数据类型
+                    List list = <int>[]; //限定元素的数据类型是 int   // <泛型>
+                    ```
+                - 构造函数方式
+                    ```
+                    List list = new List.empty(growable: true);//不限制长度的空列表
+                    List list = new List.filled(3, 0); //声明指定长度的填充列表
+                    ```
+            - 扩展操作符(..)
+                ```
+                var list = [1, 2, 3];
+                var list2 = [0, ...list]; // [0,1,2,3]
+                ```
+            - 常用 API
+                - https://api.dart.cn/stable/dart-core/List-class.html
 
-- ## 数据类型 - List
-    - Dart 中的数组,由 List 对象表示。 List 有两种声明方式
-        - 字面量方式
+
+
+                ```dart
+                // List 常用 API
+
+                void main() {
+                    // 声明List - 字面量
+                    List l1 = ['a', 'b', 'c', 1, 2, 3];
+                    print(l1);
+
+                    List l2 = <int>[1, 2, 3]; // 限定元素类型的声明方式
+                    print(l2);
+
+                    // 通过构造函数的声明方式
+                    var l3 = new List.empty(growable: true);
+                    l3.add(1);
+                    print(l3);
+
+
+                    var l4 = new List.filled(3, 6);
+                    print(l4);
+
+
+                    // 扩展操作符
+                    var l5 = [0, ...14];
+                    print(l5);
+
+                    var l6;
+                    var l7 = [7, ...?l6];
+                    print(l7);
+
+
+                    // 返回列表的长度
+                    print(l1.length);
+
+                    // 列表的反转
+                    print(l1.reversed.toList());
+
+                    // 添加元素
+                    l3.addAll([4,5,6]);
+                    print(l3);
+
+                    // 删除元素 
+                    l3.remove(6);
+                    print(l3);
+
+                    // 根据下标删除元素
+                    // l3.removeAt(index)
+                    l3.removeAt(1);
+                    print(l3);
+
+                    // 在指定的位置添加元素
+                    l3.insert(1, 9);
+                    print(l3);
+
+                    // 清空
+                    l3.clear();
+
+                    print(l3.length); // 0
+                    print(l3.isEmpty); // true
+
+                    // 合并元素
+                    List words = ['Hello', 'World'];
+                    print(words.join('-')); // Hello-World
+                }
+
+
+                6
+                [3, 2, 1, c, b, a]
+                [1, 4, 5, 6]
+                [1, 4, 5]
+                1
+                [1, 5]
+                [1, 9, 5]
+                ```
+
+        - ### 12.数据类型_List（下）.mp4
+
+
+
+
+        - ### 数据类型 - Set
+            - > Set 是一个 **`无序的, 元素唯一的集合`**
+            - Set 有字面量和构造函数两种声明方式 (`字面量中用大括号`)
+            - 无法通过下标取值
+            - 具有集合特有的操作
+                - 例如:求交集,并集、差集等
+            - 常用 API
+                - https://api.dart.cn/stable/dart-core/Set-class.html
+
+
+            ```dart
+            // Set 
+
+            void main() {
+                // 字面量
+                var nums = <int>{1, 2, 3};
+                print(nums); // {1, 2, 3}
+
+                // 构造函数
+                var fruits = new Set();
+                fruits.add('香蕉');
+                fruits.add('苹果');
+                fruits.add('橘子');
+                print(fruits);          // {香蕉, 苹果, 橘子}
+                print(fruits.toList()); // [香蕉, 苹果, 橘子]
+                
+                List myNums = [1, 2, 3, 3, 4];
+                print(myNums.toSet()); // 可将重复的元素过滤掉
+                // [1, 2, 3, 4]
+
+
+
+
+                // 集合特有的操作
+                var caocao = new Set();
+                caocao.addAll(['张辽', '司马懿', '关羽']);
+
+                var liubei = new Set();
+                liubei.addAll(['关羽', '张飞', '诸葛亮']);
+
+                // 求交集
+                print(caocao.intersection(liubei)); // {关羽}
+                // 求并集
+                print(caocao.union(liubei)); // {张辽, 司马懿, 关羽 张飞, 诸葛亮}
+                // 求差集
+                print(caocao.difference(liubei)); // {张辽, 司马懿}
+
+
+                // 返回第一个元素
+                print(caocao.first); // 张辽
+                // 返回最后一个
+                print(caocao.last); // 关羽
+
+                // 集合不能通过下标取值
+                // print(caocao[1]);
+            }
             ```
-            List list = []; //不限定元素的数据类型
-            List list = <int>[]; //限定元素的数据类型是 int   // <泛型>
+
+
+
+
+
+
+        - ### 数据类型-Map
+            - Map 是一个无序的 **`键值对(key-value) 映射`**。通常被称作 **`哈希`** 或 **`字典`**。
+            - 声明方式
+                - `var map = {key1: value1, key2: value2};`
+                - `var map = new Map();`
+                - `map['key'] = value;`
+            - 常用API
+                - https://api.dart.cn/stable/dart-core/Map-class.html
+
+
+
+
+            ```dart
+            void main() {
+                // 字面量
+                var person = {
+                    'name': '张三',
+                    'age': 20
+                };
+                print(person); // { 'name': '张三', 'age': 20 }
+
+                // 构造函数
+                var p = Map();
+                p['name'] = '李四';
+                p['age'] = 22;
+                print(p); // { 'name': '李四', 'age': 22 }
+
+
+                // 访问属性
+                print(p['name']); // 李四
+
+
+                // 判断 Map 中的 key 是否存在
+                print(p.containsKey('name')); // true
+                print(p.containsKey('aaa')); // false
+
+                // 赋值
+                // putIfAbsent, 如果 key 不存在,我们才赋值(如果key已经存在,则不赋值)
+                p.putIfAbsent('gender', () => '男');
+                print(p);
+                p.putIfAbsent('gender', () => '女');
+                print(p);
+
+
+
+
+                // 获取 Map 中所有的 key
+                print(p.keys);
+                // 获取 Map 中所有的 value
+                print(p.values);
+
+                // 根据条件进行删除
+                p.removeWhere((key, value) => key == 'gender')
+                print(p); // { 'name': '李四', 'age': 22 }
+            }
             ```
-        - 构造函数方式
+
+
+
+
+        - ### 数据类型-其他: Runes , Symbol , Dynamic
+            - ### Runes (符文)
+                - Runes 对象是一个32位字符对象。它可以把文字转换成符号表情或特定的文字
+                - print('\u{1f44d}') => 👍
+                ```dart
+                Runes unicodeCharacters = new Runes('\u2665 \u{1f680} \u{1f30d}');
+                ```
+                - https://copychar.cc/
+            - ### Symbol
+                - 在 Dart 中符号用#开头来表示的标识符
+                ```dart
+                Symbol mySymbol = #exampleSymbol;
+                ```
+            - ### Dynamic
+                - 动态数据类型
+                - dynamic 不属于基本数据类型
+
+                ```dart
+                dynamic dynamicVar = 42; // 可以存储整数
+                print(dynamicVar); // 输出: 42
+
+                dynamicVar = "Hello, Dart!"; // 可以存储字符串
+                print(dynamicVar); // 输出: Hello, Dart!
+
+                dynamicVar = true; // 也可以存储布尔值
+                print(dynamicVar); // 输出: true
+                ```
+
+            ```dart
+            void main() {
+                var str = '😀';
+                print(str);
+                print(str.length); // UTF-16            // 2
+                print(str.runes.length); // UTF-32      // 1
+
+                // Runes 可以将 UTF-32 字符集表示的内容转成符号 
+                Runes input = new Runes('\u{1f680}');
+                print(new String.fromCharCodes(input)); // 😀
+
+                // Symbol
+                var a = #abc; 
+                print(a);   // Symbol("abc")
+                var b = new Symbol('abc');
+                print(b);   // Symbol("abc")
+
+                print(#abc == new Symbol('abc');  // true
+            }
             ```
-            List list = new List.empty(growable: true);//不限制长度的空列表
-            List list = new List.filled(3, 0); //声明指定长度的填充列表
-            ```
-    - 扩展操作符(..)
-        ```
-        var list = [1, 2, 3];
-        var list2 = [0, ...list]; // [0,1,2,3]
-        ```
-    - 常用 API
-        - https://api.dart.cn/stable/dart-core/List-class.html
+
+            - 字符集和字符编码
+                - 最基本的字符集: ASCII码 -> UTF-8 -> UTF-16 -> -> UTF-32, 它们是不断呢扩充的关系
+
+                - dart 中的字符集 就是 UTF16
 
 
-
-        ```dart
-        // List 常用 API
-
-        void main() {
-            // 声明List - 字面量
-            List l1 = ['a', 'b', 'c', 1, 2, 3];
-            print(l1);
-
-            List l2 = <int>[1, 2, 3]; // 限定元素类型的声明方式
-            print(l2);
-
-            // 通过构造函数的声明方式
-            var l3 = new List.empty(growable: true);
-            l3.add(1);
-            print(l3);
+                - UTF32 编码有一个规则: 
+                    - 如果长度不超过4位，可以直接写，如: `'\u{1f680}'`
+                    - 如果长度超过4位，则要写大括号，如: `'\u{1f680}'`
 
 
-            var l4 = new List.filled(3, 6);
-            print(l4);
+                - [字符集和字符编码](https://www.itbirds.top/show/ad469c97f802ced547c6f36087760c36.html)
+                    - Unicode 是国际标准字符集
+                    - 字符集是很多个字符的集合，例如 GB2312 是简体中文的字符集，它收录了六千多个常用的简体汉字及一些符号，数字，拼音等字符
 
+                    - 字符编码是 字符集的一种实现方式，把字符集中的字符映射为特定的字节或字节序列，它是一种规则
 
-            // 扩展操作符
-            var l5 = [0, ...14];
-            print(l5);
-
-            var l6;
-            var l7 = [7, ...?l6];
-            print(l7);
-
-
-            // 返回列表的长度
-            print(l1.length);
-
-            // 列表的反转
-            print(l1.reversed.toList());
-
-            // 添加元素
-            l3.addAll([4,5,6]);
-            print(l3);
-
-            // 删除元素 
-            l3.remove(6);
-            print(l3);
-
-            // 根据下标删除元素
-            // l3.removeAt(index)
-            l3.removeAt(1);
-            print(l3);
-
-            // 在指定的位置添加元素
-            l3.insert(1, 9);
-            print(l3);
-
-            // 清空
-            l3.clear();
-
-            print(l3.length); // 0
-            print(l3.isEmpty); // true
-
-            // 合并元素
-            List words = ['Hello', 'World'];
-            print(words.join('-')); // Hello-World
-        }
-
-
-        6
-        [3, 2, 1, c, b, a]
-        [1, 4, 5, 6]
-        [1, 4, 5]
-        1
-        [1, 5]
-        [1, 9, 5]
-        ```
-
-- ## 12.数据类型_List（下）.mp4
-
-
-
-
-- ## 数据类型 - Set
-    - Set 是一个无序的,元素唯一的集合
-    - Set 有字面量和构造函数两种声明方式 (`字面量中用大括号`)
-    - 无法通过下标取值
-    - 具有集合特有的操作
-        - 例如:求交集,并集、差集等
-    - 常用 API
-        - https://api.dart.cn/stable/dart-core/Set-class.html
-
-
-    ```dart
-    // Set 
-
-    void main() {
-        // 字面量
-        var nums = <int>{1, 2, 3};
-        print(nums); // {1, 2, 3}
-
-        // 构造函数
-        var fruits = new Set();
-        fruits.add('香蕉');
-        fruits.add('苹果');
-        fruits.add('橘子');
-        print(fruits);          // {香蕉, 苹果, 橘子}
-        print(fruits.toList()); // [香蕉, 苹果, 橘子]
-        
-        List myNums = [1, 2, 3, 3, 4];
-        print(myNums.toSet()); // 可将重复的元素过滤掉
-        // [1, 2, 3, 4]
-
-
-
-
-        // 集合特有的操作
-        var caocao = new Set();
-        caocao.addAll(['张辽', '司马懿', '关羽']);
-
-        var liubei = new Set();
-        liubei.addAll(['关羽', '张飞', '诸葛亮']);
-
-        // 求交集
-        print(caocao.intersection(liubei)); // {关羽}
-        // 求并集
-        print(caocao.union(liubei)); // {张辽, 司马懿, 关羽 张飞, 诸葛亮}
-        // 求差集
-        print(caocao.difference(liubei)); // {张辽, 司马懿}
-
-
-        // 返回第一个元素
-        print(caocao.first); // 张辽
-        // 返回最后一个
-        print(caocao.last); // 关羽
-
-        // 集合不能通过下标取值
-        // print(caocao[1]);
-    }
-    ```
-
-
-
-
-
-
-    - ## Dart 数据类型-Map
-        - Map 是一个无序的 **`键值对(key-value) 映射`**。通常被称作 **`哈希`** 或 **`字典`**。
-        - 声明方式
-            - var map = {key1: value1, key2: value2};
-            - var map = new Map();
-            - map['key'] = value;
-        - 常用API
-            - https://api.dart.cn/stable/dart-core/Map-class.html
-
-
-
-
-        ```dart
-        void main() {
-            // 字面量
-            var person = {
-                'name': '张三',
-                'age': 20
-            };
-            print(person); // { 'name': '张三', 'age': 20 }
-
-            // 构造函数
-            var p = Map();
-            p['name'] = '李四';
-            p['age'] = 22;
-            print(p); // { 'name': '李四', 'age': 22 }
-
-
-            // 访问属性
-            print(p['name']); // 李四
-
-
-            // 判断 Map 中的 key 是否存在
-            print(p.containsKey('name')); // true
-            print(p.containsKey('aaa')); // false
-
-            // 赋值
-            // putIfAbsent, 如果 key 不存在,我们才赋值(如果key已经存在,则不赋值)
-            p.putIfAbsent('gender', () => '男');
-            print(p);
-            p.putIfAbsent('gender', () => '女');
-            print(p);
-
-
-
-
-            // 获取 Map 中所有的 key
-            print(p.keys);
-            // 获取 Map 中所有的 value
-            print(p.values);
-
-            // 根据条件进行删除
-            p.removeWhere((key, value) => key == 'gender')
-            print(p); // { 'name': '李四', 'age': 22 }
-        }
-        ```
+                    > Unicode **`只是字符集`** <br>
+                    > UTF-8、UTF-16、UTF-32 **`才是真正的字符编码规则`**
