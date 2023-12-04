@@ -623,3 +623,138 @@
 
                     > Unicode **`只是字符集`** <br>
                     > UTF-8、UTF-16、UTF-32 **`才是真正的字符编码规则`**
+
+    - ## Dart 运算符
+        - 地板除(~/)
+        - 类型判断运算符 (is | is!)
+        - 避空运算符(?? | ??=)
+        - 条件属性访问(?)
+        - 级联运算符(..)
+            ```dart
+            myObject.myMethod(); //返回 myMethod 的返回值
+            myObject.myMethod();//返回 myObject 对象的引用
+            ```
+
+        ```dart
+        void main() {
+            // 地板除
+            print(7 ~/ 4); // 1
+
+            // 类型判断运算符
+            List list = [];
+            if (list is List)
+                print('list is List');
+            }else {
+                print('list is not List');
+            }
+
+            if (list is! List) {
+                print('不是列表');
+            } else {
+                print('是列表');
+            }
+
+
+            // 避空运算符
+            print(1 ?? 3); // 返回 1
+            print(null ?? 12); // 返回 12
+
+            var foo;
+            // foo = 6;
+            print(foo ?? 0); // 如果 foo 是 null, 则返回 0
+
+
+            var a;
+            // if (a == null) {
+            //   a = 3;
+            // }
+            a ??= 3;
+            print(a);
+            a ??= 6; // 如果a不是null,则赋值失败
+            print(a);
+
+
+
+            // 条件属性运算符(保护可能为空的属性)
+            var m = new Map();
+            print(m.length);
+            var obj;
+            // print(obj.length); // The getter 'length' was called on null.
+            print(obj?.length); // null
+
+
+
+            // 级联运算符
+            // Set s = new Set();
+            // s.add(1);
+            // s.add(2);
+            // s.add(3); //s.remove(2);
+            // print(s); // {1, 3}
+
+            Set s = new Set();
+            s..add('a')
+             ..add('b')
+             ..add('c')
+             ..remove('b');
+            print(s); // {a, c}
+        }
+        ```
+
+    - ## Dart函数-声明函数
+
+        - 直接声明
+            - Dart 中声明函数不需要 function 关键字
+        - 箭头函数
+            - Dart 中的箭头函数中, **`函数体只能写一行且不能带有结束的分号`**
+            - 箭头函数 函数体内 只能写一行
+            - Dart 中的箭头函数, 只是函数的一种简写形式
+            - 箭头函数 又叫 Lambda 函数 (JAVA中)
+        - 匿名函数
+        - 立即执行函数
+
+        ```dart
+        // Dart 中声明函数,不需要 function 关键字
+        void printInfo() {
+            print('Hello, World');
+        }
+
+        // 返回值,与函数声明的类型要一致
+        int getNum() {
+            // return 'Hello'; // 不能返回字符串类型
+            return 1;
+        }
+
+
+        void main() {
+            // 调用函数
+            printInfo();
+
+            print(getNum());
+
+            // 匿名函数
+            var myPrint = (value) { // 等号后面是 匿名函数
+                print(value);
+            };
+            List fruits = ['苹果','香蕉','猕猴桃'];
+            // fruits.forEach((element) { }) // 匿名函数
+            fruits.forEach(myPrint);
+
+
+
+            // 箭头函数
+            // fruits.forEach((element) => { });
+            fruits.forEach((element) => {
+                print(element) // 箭头函数中,不能写结束的分号(;) // 箭头函数 函数体内 只能写一行
+            });
+            fruits.forEach((element) => print(element));
+
+
+            // 立即执行函数
+            ((int n){ 
+                print(n);
+            }) (17);
+        }
+        ```
+
+
+
