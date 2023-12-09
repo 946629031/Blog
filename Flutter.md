@@ -669,9 +669,9 @@
             //   a = 3;
             // }
             a ??= 3;
-            print(a);
+            print(a); // 3
             a ??= 6; // 如果a不是null,则赋值失败
-            print(a);
+            print(a); // 3
 
 
 
@@ -757,4 +757,127 @@
         ```
 
 
+    - ## 函数参数
+    - ## 作用域和闭包
+        - dart 的闭包 和 JS的闭包 一摸一样
+        - 作用域链
+            - 内层函数 能访问 外层函数的变量
+            - 一层一层往外 链接起来，这就称之为 作用域链
+            ```dart
+            void main () {
+                funA () {
+                    print('funA');
 
+                    funB () {
+                        print('funB');
+
+                        funC () {
+                            print('funC');
+                        }
+                        return funC;
+                    }
+                    return funB;
+                }
+
+                var a = funA();
+                var b = a();
+                b(); // funC
+            }
+            ```
+            - ![](./img/flutter/Scope-Chain.jpg)
+
+        - 闭包出现的原因
+            - 全局变量：我们可以在 任何地方 访问全局变量。但是 因此全局变量也 很容易被污染
+            - 局部变量：只能在 函数内部 访问，有安全边界 可以减少被污染的几率
+            > 介于 全局变量 和 局部变量 之间的优缺点，我们我们有一个折中的方案，就是 **`闭包`** <br><br>
+            > 闭包使用时机: 既能 **`重用变量，又不想 变量被污染`** <br><br>
+            > **`闭包实现原理`**: 外层函数被调用后，外层函数的作用域对象 (AO) 被内层函数引用着，导致外层函数的作用域对象 无法释放，从而形成闭包 <br><br>
+            > 闭包使用场景: 函数作为返回值，函数作为参数传递 <br><br>
+
+            - 闭包：函数和变量 共同构成一个 闭包
+
+        ```dart
+        void main () {
+            var globalNum = 100;
+
+            printInfo () {
+                // 局部变量
+                var localNum = 10;
+                localNum --;
+                print('localNum: $localNum');
+                print('globalNum: $globalNum'); // 我们可以在 函数内部 作用域中，访问 全局变量
+            };
+
+            printInfo();
+            // print(localNum); // 不能在全局作用域中，访问 局部变量
+
+
+            printInfo(); // 9 // 100
+            printInfo(); // 9 // 100
+            printInfo(); // 9 // 100
+            // 每次 执行函数，都是重新 声明变量，所以多次调用 同一函数 结果都一样
+
+
+
+
+            // 闭包
+            parent () {
+                var money = 1000;
+                return () {
+                    money -= 100;
+                    print('parent: $money');
+                };
+            }
+
+            var p = parent();
+            p(); // 900
+            p(); // 800
+            p(); // 700
+
+            // 内层函数执行完，只会释放内层 函数的作用域
+            // 但是不会释放 外层函数的作用域，所以 变量 money 会被一直保留
+        }
+        ```
+
+
+    
+    - ## Dart 函数-异步函数
+        - JavaScript 中,异步调用通过 Promise 来实现
+            - async 函数返回一个 Promise, await 用于等待 Promise
+        - Dart 中,异步调用通过 Future 来实现
+            - async 函数返回一个 Future, await 用于等待 Future
+        - Future 详情
+            - https://api.dart.dev/stable/dart-async/Future-class.html
+
+
+        ```dart
+        import 'package:http/http.dart' as http;
+        import 'dart:convert';
+
+        Future getIPAddress() async {
+            final url = 'https://httpbin.org/ip'; // 访问这个地址 可以返回 当前机器的IP
+            final response = await http.get(url);
+            String ip = json Decode(response.body)['origin'];
+            return ip;
+        }
+
+
+        void main () async {
+            try {
+                final ip = await getIPAddress();
+                print(ip);
+            } catch (e) {
+                print(e);
+            }
+        }
+        ```
+
+        - https://pub.dev/packages/http/install
+            - `pubspec.yaml` 相当于 `package.json`
+
+            ```
+            // pubspec.yaml
+
+            dependencies:
+                http: ^1.1.2
+            ```
