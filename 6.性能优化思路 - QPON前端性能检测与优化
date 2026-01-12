@@ -1,0 +1,104 @@
+(web.dev)[https://web.dev/articles/lcp?hl=zh_cn]
+
+
+
+# 零、前言
+本文主要探讨网页前端性能优化的四个关键步骤：量化、诊断、优化和监控页面性能。
+- 量化：通过网页核心指标（Core Web Vitals）量化当前页面性能。
+- 诊断：利用性能诊断工具和用户数据分析发现性能瓶颈和优化机会。
+- 优化：针对问题进行优化，并比较优化前后的性能指标。
+- 监控：使用自动化工具进行持续性能监控，防止性能回归和劣化。
+基于Google的性能指标，通过系统性的分析对网页性能和体验进行优化，以实现有条不紊、循序渐进的性能检测与优化。
+
+# 一、背景
+## 1.用户环境
+qpon主要面向海外印尼地区的用户，此部分地区用户的设备性能和网络状况相较于国内会差很多，因此对网页加载速度的感知会更明显。
+
+## 2.必要性
+2.1 减少用户流失
+Think with Google报告指出，页面加载时长与用户流失率有密切关系，当加载时长从1秒增加到5秒，用户跳出率会增加90%。
+
+![](https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/d06d94193db74560a64a04ce105059f3.png~tplv-a9rns2rl98-image.png?rcl=20260105103513F32E327AAE06A84B83E3&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083804513&x-signature=cbuoVByX5RRApBkUW7V2y4hyCZU%3D)
+
+缓慢的页面加载时长在影响用户体验的同时也非常考验用户的耐心，每增加一秒加载时长意味着消磨着用户的耐心和增加用户的跳出率，即使再有耐心的用户也会因为迟迟加载不出页面而选择离开。
+
+## 2.2 SEO优化
+Google官方一直在鼓励网页给用户带来更好的体验，为此将一些衡量网页性能的指标纳入到其搜索引擎排名算法中，以奖励那些交互友好和给用户带来更好体验的页面，为其带来更大的流量潜力。
+
+## 2.3 用户体验
+用户体验友好的页面可以提高用户会话数、停留时长，为用户带来愉悦的体验的同时也提高了用户粘性，为提高用户转化率带来更多的可能。
+因此，为减少页面加载时长，提高用户体验，降低用户流失率，需要对页面的用户体验和性能进行针对性地优化。
+
+
+
+# 二、基本流程
+## 0. 一句话概括
+量化->诊断->优化->监控
+- 用量化指标来衡量当前页面性能
+- 通过诊断分析工具或采集统计用户数据来发现当前页面的性能问题或瓶颈
+- 基于问题进行针对性的优化，比对优化前后的性能指标差异
+- 通过工具实现可持续的性能监控，防止性能回归或劣化
+
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/a561e79431964b15a2fc090493f4b8f0.png~tplv-a9rns2rl98-image.png?rcl=2026010510374200AA21782BEE5A3FD0A4&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083804663&x-signature=cly7WOWfoQd%2FqhEZJowXhOL8dyQ%3D)
+
+
+### 1.量化
+#### 1.1 介绍
+通过可量化的指标来评估和衡量页面的性能和体验，以获得对当前页面性能的基本了解。之后可以基于页面性能指标进行针对性地优化，通过比对各项指标是否有真实的提升。
+
+#### 1.2 Core Web Vitals
+##### 1.2.1 介绍
+Google提供了一组web页面性能指标：Core Web Vitals（核心网页指标），Core Web Vitals的指标并不是一成不变的，会随着时间的推移而改变，例如2024年3月INP替代FID成为新的核心指标。
+截止至2024.12.01的这组指标分别为LCP（最大内容绘制时间）,INP（交互到下一帧绘制的时间）,CLS（累积布局偏移），分别对应用户体验的三个方面：加载速度，互动性，视觉稳定性。根据页面加载速度、用户输入的响应延迟、网页布局偏移来衡量网页的性能与体验。
+
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/ec9f384383cf446cbc16401363343f5b.png~tplv-a9rns2rl98-image.png?rcl=202601051041411630CC6DB38F1FCE2217&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083804901&x-signature=gFortjFhWfvuZ3fdPerCtCCNhks%3D)
+
+##### 1.2.2 Largest Contentful Paint (LCP)
+![](https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/f0fc51619ef945758743ea21618e0cc1.png~tplv-a9rns2rl98-image.png?rcl=202601051042298FF860288123E6D7AE55&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083804949&x-signature=V5bqWrPh4R2w1mXi8SLzUvF2sEE%3D)
+
+###### 1.2.2.1 作用
+视图内最大内容的绘制渲染时间，用于衡量网页主要内容加载速度。
+
+###### 1.2.2.2 重要性
+- 反映加载速度
+是影响用户对网页加载速度感知的重要因素，可真实反映用于对网页加载速度的直观感受。
+也是研发衡量网页加载速度的重要指标，帮助研发识别影响页面性能的关键资源。
+
+- 影响SEO排名
+同时，Google将LCP指标纳入到其搜索引擎排名算法中，较低的LCP意味着较低的搜索引擎排名，会影响网页SEO（Search Engine Optimization）。
+
+- 混合开发时，可帮助优化移动设备的内存使用和电流消耗
+优化LCP通常会拆分和压缩资源，拆分复杂的长任务，减少不必要的重绘和重排操作等，可降低CPU的功耗和内存使用，以减少移动设备（Android或ios）的电流消耗。
+
+###### 1.2.2.3 统计方式
+网页通常分阶段加载，因此网页上最大内容可能会发生变化。开始加载页面时浏览器会将绘制的第一帧识别为最大内容元素。在渲染后续帧时，浏览器会将更大的内容识别成最大内容元素，直到用户开始与页面进行互动才会停止记录。因此从 页面加载起点 到 图片绘制完成 的时间即LCP。
+
+###### 1.2.2.4 示例
+下图会标记页面在不同时间段的最大内容是哪个元素，开始时将绘制的第一张识别为最大内容元素。页面开始加载渲染文本块时，最大内容变成了文本块。随着页面加载，最大内容变成了紫色的图片，因此LCP是网页加载到此图片绘制完成的时间。
+
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/4ba6ea773def47528cf91c8a6d4946f1.png~tplv-a9rns2rl98-image.png?rcl=2026010510495558465E12835F77A62DE5&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083805395&x-signature=qoSUTU5ib8l7a1YLdgibnk6%2F9jI%3D)
+
+##### 1.2.3 Cumulative Layout Shift (CLS)：
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/72ce1f459fad4385ac3932364748ac55.png~tplv-a9rns2rl98-image.png?rcl=202601051051575B1386E2E3FC05BCC527&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083805518&x-signature=J7sGv4qJAqGaVfCCZPrpFDJoGus%3D)
+
+###### 1.2.3.1 作用
+累积布局偏移，该指标用于统计网页加载时的元素意外偏移的累计分数。布局偏移是影响用户体验的重要指标，较高的布局偏移分数会影响用户的体验。
+
+###### 1.2.3.2 重要性
+越高的布局偏移意味着页面元素的抖动比较明显，用户非常容易误触页面，导致意外的交互发生，影响用户体验的同时也有可能导致用户的流失。
+
+###### 1.2.3.3示例
+举个例子，如下图所示，当某个用户在网页加载时想要点击下单按钮，却因为意外的布局偏移和页面抖动导致误触了其他元素，导致影响用户体验的同时可能也导致了订单的流失。
+
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/cd353d516d07477688e9db03cdffcb7c.png~tplv-a9rns2rl98-image.png?rcl=20260105111739D3CE67813D8A4040FD2D&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083807059&x-signature=o5DZmFrp8eRC1Uvg1eSyf6Ka44o%3D)
+
+一个交互友好，对用户友好的页面应当尽可能地避免意外的布局偏移，例如为可能导致布局偏移的元素提前预留空间和位置。如下图所示，为加载时间较长的图片预留空间，可以有效地防止用户误点击，后续的优化CLS思路也是遵循着这个思路。
+
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/ed7322c71fa94b699e8aacd2d5cf97f2.png~tplv-a9rns2rl98-image.png?rcl=2026010511180830CA3024514731FCBDF8&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083807088&x-signature=EvSXdmmdbJJfcClWge8Njv3nH1k%3D)
+
+##### 1.2.4 Interaction to Next Paint (INP)：
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/ed898a7508474ae1baaef6cff93f7d64.png~tplv-a9rns2rl98-image.png?rcl=20260105112035A4C9528EB2EF97CAB3B8&rk3s=8e244e95&rrcfp=dafada99&x-expires=2083807236&x-signature=eF%2B2gDifGn9HDkGeZf9d7zYMkqQ%3D)
+
+###### 1.2.4.1 作用
+交互到下一帧绘制的时间，就是用户在页面上执行交互操作（例如点击）到随后在屏幕的视觉更新或渲染的延迟时间，反映交互的响应延迟，说白了就是用来评价当前页面的交互丝滑与否。用于衡量页面对用户交互的响应速度。
+如下图所示，左图的响应速度明显慢于右图，可通过INP直观反映两个页面之间的响应速度和交互流畅度。
