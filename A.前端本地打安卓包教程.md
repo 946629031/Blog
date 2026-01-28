@@ -20,54 +20,54 @@ https://blog.csdn.net/godot06/article/details/104378253
 右键我的电脑->属性->高级系统设置->环境变量
 双击path
 
-图片: https:
+![](https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/8b03e6be904e4774965d0c73c921484a.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260128192841E883347C7BF55024A5FE&rrcfp=dafada99&x-expires=2085823722&x-signature=2YebtOFBgaRuNRN3e%2BUPldUV0ek%3D)
 
 新建一条把安卓sdk的位置放进去
-图片: https:
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/871d148485ed4fd498463d884b77633e.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260128192841E883347C7BF55024A5FE&rrcfp=dafada99&x-expires=2085823722&x-signature=4twWJXr4f3FmTlBaBJ28oo%2FdmOg%3D)
 
 安卓sdk位置获取：
 
 1.点击Android studio右上角的设置按钮，点击settings
-图片: https:
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/9f350e5ec57b4a6ba297ae54e291f7e4.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260128192841E883347C7BF55024A5FE&rrcfp=dafada99&x-expires=2085823722&x-signature=h3geKPpuJJSAGNX3vd1e9UkcNCU%3D)
 
 2.复制路径并在我的电脑中打开对应目录
-图片: https:
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/98a62c60f477473988837b4f374799cd.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260128192841E883347C7BF55024A5FE&rrcfp=dafada99&x-expires=2085823722&x-signature=KdCPUFCSQB7CYDar5RbfzGjUHzc%3D)
 
 3.打开下面的文件夹
-图片: https:
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/a9d43861958545d8b3ed13e76a652423.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260128192841E883347C7BF55024A5FE&rrcfp=dafada99&x-expires=2085823722&x-signature=kCLYz%2FlCPQUKLyjcE0P%2F63GtbN0%3D)
 
 4.看是否有adb.exe,如果有直接复制进来的路径
 类似：D:\Users\80408764\AppData\Local\Android\Sdk\platform-tools
-图片: https:
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/9a8a20073bde4b3aa5e3f310fa42b532.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260128192841E883347C7BF55024A5FE&rrcfp=dafada99&x-expires=2085823722&x-signature=5OAH4qX9Kn%2ByRZsOzgFzD1jPhgU%3D)
 
-CMAKE和NDK 安装
+## CMAKE和NDK 安装
 cmake下载，4.1.2版本即可
 
-图片: https:
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/18f5d33ec9ec47a4bce3cd26c60e0b10.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260128192841E883347C7BF55024A5FE&rrcfp=dafada99&x-expires=2085823722&x-signature=Epg2FZrqWznTZ4sr8Mkz8ZUR6RQ%3D)
 ndk安装和对应版本
 
 打开安卓studio，选sdk tools，勾选NDK和展示对应版本，选择版本27.1.12297006并点击ok，开始下载ndk
-图片: https:
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/8339559591764198a1d580acb1f4476e.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260128192841E883347C7BF55024A5FE&rrcfp=dafada99&x-expires=2085823722&x-signature=QR%2BeQ3xVJJtX0plHKk1rQGhA%2FDM%3D)
 
-二、打包和可能遇到的问题
+# 二、打包和可能遇到的问题
 在bash中运行脚本（第一次运行较慢，不报错即可）
 rn连本地的包（命令中有debug）
-图片: https:
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/71747857449841b69a91ab84a588cadb.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260128192841E883347C7BF55024A5FE&rrcfp=dafada99&x-expires=2085823722&x-signature=lk8VfXa8x3FAOJGEa2a91XF938c%3D)
 静态rn包（命令为release）
 
-图片: https:
+![](https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/f5e3f8cdf9924425951aaf5337c6dc41.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=20260128192841E883347C7BF55024A5FE&rrcfp=dafada99&x-expires=2085823722&x-signature=LauFEXTH7P6tdjwr8taQZh3DI8Q%3D)
 可能遇到的问题
 
 SDK location （ai解决即可）
-图片: https://
+![](https://p9-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/1b2cefa6558042c2b98d8ff9daf90176.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=202601281929149DC692EFB46E82247F67&rrcfp=dafada99&x-expires=2085823754&x-signature=ajfnSzNOMa3ouOg3OUwxBKX17EU%3D)
 
 下载的ndk缺文件（ai解决）
-图片: https://
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/37fa57fffc9f4918afb9df1322da763c.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=202601281929149DC692EFB46E82247F67&rrcfp=dafada99&x-expires=2085823754&x-signature=ZPBIlXN8Whd2sf78IrEqPGXvjxk%3D)
 
 3.成品位置
 打开apk包对应位置
 apps/rn/android/app/build/outputs/apk/debug
-图片: https:
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/b7af5e10d0664034a1a62ce7da43d702.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=202601281929149DC692EFB46E82247F67&rrcfp=dafada99&x-expires=2085823754&x-signature=JEdTqTqIwxMWZ1LPGBMGZsFdlWg%3D)
 
 打开命令行输入adb install -t ，然后把apk包拖进命令行即可，安装成功会出现如下提示
-图片: https:
+![](https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/f72696e49d1848e295590aa9943676e5.png~tplv-a9rns2rl98-image.png?lk3s=8e244e95&rcl=202601281929149DC692EFB46E82247F67&rrcfp=dafada99&x-expires=2085823754&x-signature=ppDhGhRqlr%2BDJEUVMDreHS81yro%3D)
